@@ -18,6 +18,10 @@
   let followupsAvailable = false;
   let activeDialog;
   let searchTimer;
+  let viewMode = 'table';
+  const board = document.getElementById('crm-board-view');
+  const tableView = document.getElementById('crm-table-view');
+  const refreshButton = document.getElementById('crm-accounts-refresh');
 
   function element(tag, text, classes) {
     const node = document.createElement(tag);
@@ -67,36 +71,111 @@
       cell.colSpan = 8;
       row.append(cell);
       list.append(row);
+      renderBoard();
       return;
     }
     accounts.forEach((account, index) => {
-      const row = element('tr', null, 'border-b border-slate-100 hover:bg-slate-50');
-      const values = [
-        (page - 1) * 50 + index + 1,
-        account.name || 'Nome não informado',
-        account.email || 'E-mail não informado'
-      ];
-      values.forEach(value => row.append(element('td', value, 'px-4 py-4')));
-      const phoneCell = element('td', null, 'px-4 py-4 text-center');
+      const row = element('tr');
+      row.append(element('td', (page - 1) * 50 + index + 1));
+      const contact = element('td');
+      const identity = element('div', null, 'crm-contact-cell');
+      const avatar = element('span', initials(account), 'crm-avatar');
+      avatar.setAttribute('aria-hidden', 'true');
+      const identityText = element('div');
+      const name = element('button', account.name || 'Nome não informado', 'crm-contact-name');
+      name.type = 'button';
+      name.addEventListener('click', () => openAccount(account, name));
+      identityText.append(name, element('p', account.email || 'E-mail não informado', 'crm-contact-email'));
+      identity.append(avatar, identityText);
+      contact.append(identity);
+      row.append(contact);
+      const phoneCell = element('td');
       phoneCell.append(whatsapp(account) || element('span', 'Não informado', 'text-slate-400'));
       row.append(phoneCell);
-      row.append(element('td', profiles[account.profile] || 'Não informado', 'px-4 py-4 text-center'));
+      row.append(element('td', profiles[account.profile] || 'Não informado'));
       const access = account.isAdmin ? 'Administrador' : plans[account.plan] || 'Grátis';
-      const planCell = element('td', null, 'px-4 py-4 text-center');
-      planCell.append(element('span', access, 'px-3 py-1 rounded-lg bg-sky-50 text-sky-800 font-bold'));
+      const planCell = element('td');
+      planCell.append(element('span', access, 'crm-badge' + (account.isAdmin ? ' crm-badge-admin' : account.plan !== 'gratis' ? ' crm-badge-paid' : '')));
       if (account.isGuest) planCell.append(element('div', 'Convidado Mídia', 'mt-1 text-xs text-slate-500'));
       row.append(planCell);
-      row.append(element('td', followupsAvailable
-        ? stages[account.followup?.stage || 'novo'] || 'Não informado'
-        : 'Indisponível', 'px-4 py-4 text-center'));
-      const action = element('td', null, 'px-4 py-4 text-right');
-      const button = element('button', 'Abrir ficha', 'px-3 py-2 rounded-lg bg-slate-100 text-slate-800 font-bold hover:bg-sky-100');
+      const stageCell = element('td');
+      const stage = Object.hasOwn(stages, account.followup?.stage) ? account.followup.stage : 'novo';
+      stageCell.append(element('span', followupsAvailable ? stages[stage] : 'Indisponível', 'crm-badge crm-stage-' + stage));
+      row.append(stageCell);
+      row.append(element('td', followupsAvailable ? nextContactLabel(account) : 'Indisponível', dateClass(account)));
+      const action = element('td');
+      const button = element('button', 'Abrir ficha', 'crm-btn');
       button.type = 'button';
       button.addEventListener('click', () => openAccount(account, button));
       action.append(button);
       row.append(action);
       list.append(row);
     });
+    renderBoard();
+  }
+
+  function initials(account) {
+    return (account.name || account.email || 'Contato').trim().split(/\s+/).slice(0, 2)
+      .map(part => Array.from(part)[0] || '').join('').toLocaleUpperCase('pt-BR');
+  }
+
+  function today() {
+    const date = new Date();
+    return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
+  }
+
+  function dateClass(account) {
+    const date = account.followup?.next_contact_date;
+    return !date ? '' : date < today() ? 'crm-date-overdue' : date === today() ? 'crm-date-today' : '';
+  }
+
+  function nextContactLabel(account) {
+    const date = account.followup?.next_contact_date;
+    return !date ? 'Sem data definida' : date === today() ? 'Hoje' : (date < today() ? 'Atrasado · ' : '') + dateLabel(date);
+  }
+
+  function renderBoard() {
+    if (!board) return;
+    board.replaceChildren();
+    const commercial = accounts.filter(account => !account.isAdmin);
+    if (!followupsAvailable) {
+      board.append(element('p', 'O acompanhamento está indisponível. A tabela continua mostrando os acessos dos contatos.', 'crm-column-empty'));
+    } else {
+      Object.entries(stages).forEach(([key, label]) => {
+        const column = element('section', null, 'crm-column');
+        const contacts = commercial.filter(account => (account.followup?.stage || 'novo') === key);
+        const heading = element('h3', null, 'crm-column-heading');
+        heading.append(element('span', label), element('span', contacts.length, 'crm-column-count'));
+        column.append(heading);
+        if (!contacts.length) column.append(element('p', 'Nenhum contato nesta página.', 'crm-column-empty'));
+        contacts.forEach(account => {
+          const card = element('button', null, 'crm-board-contact');
+          card.type = 'button';
+          card.append(element('p', account.name || 'Contato sem nome', 'crm-board-name'),
+            element('p', account.email || 'E-mail não informado', 'crm-board-meta'),
+            element('p', plans[account.plan] || 'Grátis', 'crm-board-meta'),
+            element('p', nextContactLabel(account), 'crm-board-meta ' + dateClass(account)));
+          card.addEventListener('click', () => openAccount(account, card));
+          column.append(card);
+        });
+        board.append(column);
+      });
+    }
+    const summary = document.getElementById('crm-page-summary');
+    if (summary) {
+      const due = commercial.filter(account => account.followup?.next_contact_date && account.followup.next_contact_date <= today()).length;
+      summary.textContent = followupsAvailable
+        ? commercial.length + ' contato(s) comerciais nesta página · ' + due + ' retorno(s) para hoje ou atrasados. O quadro usa esta página; administradores aparecem apenas na tabela.'
+        : 'Acompanhamento indisponível. Etapas e datas não foram presumidas.';
+    }
+  }
+
+  function setView(mode) {
+    viewMode = mode;
+    if (tableView) tableView.hidden = viewMode !== 'table';
+    if (board) board.hidden = viewMode !== 'board';
+    document.getElementById('crm-view-table')?.setAttribute('aria-pressed', String(viewMode === 'table'));
+    document.getElementById('crm-view-board')?.setAttribute('aria-pressed', String(viewMode === 'board'));
   }
 
   function setMetrics(metrics) {
@@ -114,6 +193,7 @@
 
   const planFilter = element('select', null, 'px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white text-slate-800');
   planFilter.setAttribute('aria-label', 'Filtrar por plano');
+  planFilter.id = 'crm-plan-filter';
   [['', 'Todos os planos'], ...Object.entries(plans), ['admin', 'Administradores']].forEach(([value, label]) => {
     const option = element('option', label);
     option.value = value;
@@ -121,19 +201,25 @@
   });
   const profileFilter = element('select', null, planFilter.className);
   profileFilter.setAttribute('aria-label', 'Filtrar por perfil');
+  profileFilter.id = 'crm-profile-filter';
   [['', 'Todos os perfis'], ...Object.entries(profiles)].forEach(([value, label]) => {
     const option = element('option', label);
     option.value = value;
     profileFilter.append(option);
   });
-  const filterBar = element('div', null, 'py-3 flex flex-wrap items-center gap-3');
+  const filterBar = element('div', null, 'crm-filter-bar');
   filterBar.append(planFilter, profileFilter);
-  const explanation = element('p',
-    'Indicadores de toda a base comercial. Administradores e convidados Mídia ficam fora destes totais.',
-    'text-xs text-slate-500');
-  filterBar.append(explanation);
+  const clearFilters = element('button', 'Limpar filtros', 'crm-btn');
+  clearFilters.type = 'button';
+  clearFilters.addEventListener('click', () => {
+    search.value = ''; planFilter.value = ''; profileFilter.value = '';
+    clearTimeout(searchTimer); loadRadarCrm(1);
+  });
+  filterBar.append(clearFilters);
   const tableContainer = list.closest('.overflow-x-auto');
-  tableContainer.parentElement.before(filterBar);
+  const filterHost = document.getElementById('crm-filters-host');
+  if (filterHost) filterHost.append(filterBar);
+  else tableContainer.parentElement.before(filterBar);
 
   async function loadRadarCrm(requestedPage = page) {
     if (!window.currentAdminUser) return;
@@ -142,6 +228,7 @@
     controller = request;
     previous.disabled = true;
     next.disabled = true;
+    if (refreshButton) refreshButton.disabled = true;
     status.textContent = 'Carregando cadastros…';
     status.setAttribute('role', 'status');
     try {
@@ -172,22 +259,28 @@
       setMetrics(null);
       document.getElementById('mondayListCount').textContent = 'Consulta indisponível';
       status.textContent = error.message || 'Não foi possível consultar a base.';
+    } finally {
+      if (controller === request && refreshButton) refreshButton.disabled = false;
     }
   }
 
   function openAccount(account, opener) {
     activeDialog?.remove();
-    const dialog = element('dialog', null,
-      'w-full max-w-xl rounded-2xl p-6 bg-white text-slate-900 shadow-2xl backdrop:bg-slate-900/60');
+    const dialog = element('dialog', null, 'crm-contact-dialog');
     dialog.setAttribute('aria-labelledby', 'crm-contact-title');
     const title = element('h2', account.name || 'Contato sem nome', 'text-xl font-bold');
     title.id = 'crm-contact-title';
-    const close = element('button', 'Fechar', 'px-3 py-2 rounded-lg border border-slate-200 text-sm font-bold');
+    const close = element('button', 'Fechar', 'crm-btn');
+    close.setAttribute('aria-label', 'Fechar ficha do contato');
     close.type = 'button';
-    const header = element('div', null, 'flex items-center justify-between gap-4 mb-4');
-    header.append(title, close);
+    const header = element('div', null, 'crm-dialog-header');
+    const identity = element('div');
+    identity.append(title, element('p', account.email || 'E-mail não informado', 'text-xs text-slate-500'));
+    header.append(element('span', initials(account), 'crm-avatar'), identity, close);
     dialog.append(header);
-    const details = element('dl', null, 'grid grid-cols-2 gap-3 text-sm mb-5');
+    const body = element('div', null, 'crm-dialog-body');
+    dialog.append(body);
+    const details = element('dl', null, 'crm-detail-grid');
     const rows = [
       ['E-mail', account.email],
       ['Perfil declarado', profiles[account.profile] || 'Não informado'],
@@ -204,11 +297,11 @@
       group.append(element('dt', label, 'text-xs text-slate-500'), element('dd', value || 'Não informado', 'break-words'));
       details.append(group);
     });
-    dialog.append(details);
+    body.append(details);
     const phone = whatsapp(account);
     if (phone) {
       phone.textContent = 'Conversar pelo WhatsApp';
-      dialog.append(phone);
+      body.append(phone);
     }
     const form = element('form', null, 'mt-5 space-y-3');
     const stageLabel = element('label', 'Etapa do acompanhamento', 'block text-sm font-bold');
@@ -237,7 +330,7 @@
     message.setAttribute('role', 'status');
     const history = element('div', null, 'mt-5 space-y-3 text-sm');
     form.append(stageLabel, notesLabel, dateLabelNode, save, message);
-    dialog.append(form, history);
+    body.append(form, history);
     let revision = account.followup?.revision || 0;
     let saving = false;
     let writable = false;
@@ -280,20 +373,22 @@
         writable = true;
         setEnabled(true);
         message.textContent = result.followup ? 'Última atualização em ' + dateLabel(result.followup.updated_at) + '.' : 'Nenhum contato registrado pela equipe.';
-        history.replaceChildren(element('h3', 'Histórico de alterações', 'font-bold'));
+        history.replaceChildren(element('h3', 'Histórico de alterações', 'crm-history-title'));
         if (!result.history.length) history.append(element('p', 'Sem alterações registradas.', 'text-slate-500'));
         result.history.forEach(item => {
-          const entry = element('div', null, 'p-3 border rounded-lg');
+          const entry = element('div', null, 'crm-history-entry');
           entry.append(element('p', dateLabel(item.changed_at) + ' · ' + stages[item.stage], 'font-semibold'));
           if (item.notes) entry.append(element('p', item.notes, 'whitespace-pre-wrap break-words'));
           if (item.next_contact_date) entry.append(element('p', 'Próximo contato em ' + dateLabel(item.next_contact_date)));
           history.append(entry);
         });
+        return true;
       } catch (error) {
         if (activeDialog !== dialog) return;
         message.textContent = error.message;
         writable = false;
         setEnabled(false);
+        return false;
       }
     }
     form.addEventListener('submit', async event => {
@@ -319,9 +414,10 @@
         const result = await response.json();
         account.followup = result.followup;
         revision = result.followup.revision;
-        await refreshFollowup();
-        message.textContent = 'Acompanhamento salvo no banco.';
-        await loadRadarCrm(page);
+        renderRows();
+        const refreshed = await refreshFollowup();
+        message.textContent = refreshed ? 'Acompanhamento salvo no banco.'
+          : 'Acompanhamento salvo. Não foi possível atualizar o histórico; reabra a ficha para conferir.';
       } catch (error) {
         message.textContent = error.message;
       } finally {
@@ -341,6 +437,9 @@
   });
   planFilter.addEventListener('change', updateFilters);
   profileFilter.addEventListener('change', updateFilters);
+  document.getElementById('crm-view-table')?.addEventListener('click', () => setView('table'));
+  document.getElementById('crm-view-board')?.addEventListener('click', () => setView('board'));
+  refreshButton?.addEventListener('click', () => loadRadarCrm(page));
   previous.addEventListener('click', () => loadRadarCrm(page - 1));
   next.addEventListener('click', () => loadRadarCrm(page + 1));
   window.loadRadarCrm = loadRadarCrm;
