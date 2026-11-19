@@ -2,7 +2,7 @@ name: Revisão automática de segurança
 
 on:
   push:
-    branches: [main, codex/radar-integracao]
+    branches: [main, codex/radar-integracao, codex/lancamento-20261119]
     paths:
       - '**.js'
       - '**.cjs'

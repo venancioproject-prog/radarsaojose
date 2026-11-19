@@ -493,3 +493,4 @@ public-images/
 
 !scripts/check-preview-release.cjs
 !tests/survey-cache.test.cjs
+!scripts/benchmark-survey-local.cjs
