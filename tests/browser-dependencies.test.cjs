@@ -90,3 +90,55 @@ test('Business plan collaboration never connects a public channel and preserves 
   assert.equal(refreshes,1);
   assert.equal(applied.length,1);
 });
+
+test('Business plan polling skips inactive views, resumes when visible and never overlaps slow reads', async () => {
+  const source = fs.readFileSync(path.join(__dirname, '../business-plan-controller.js'), 'utf8');
+  const start = source.indexOf('const PlanRealtimeCollab = {');
+  const end = source.indexOf('\nfunction toggleActiveCollaborator', start);
+  let timer, reads = 0, finishRead, rejectRead;
+  let sectionHidden = false, present = true;
+  const planView = { hidden: false, classList: { contains: () => sectionHidden } };
+  const context = {
+    document: { hidden: true, getElementById: () => present ? planView : null },
+    currentPlanState: {},
+    fetchPlanStateFromCloud: () => {
+      reads += 1;
+      return new Promise((resolve, reject) => { finishRead = resolve; rejectRead = reject; });
+    },
+    clearInterval() {},
+    setInterval(callback) { timer = callback; return 1; }
+  };
+  vm.createContext(context);
+  vm.runInContext(source.slice(start, end) + '\nglobalThis.collab=PlanRealtimeCollab;', context);
+  context.collab.startPollingFallback();
+  await timer();
+  assert.equal(reads, 0, 'A hidden browser tab must not query');
+  context.document.hidden = false;
+  sectionHidden = true;
+  await timer();
+  sectionHidden = false;
+  planView.hidden = true;
+  await timer();
+  planView.hidden = false;
+  present = false;
+  await timer();
+  assert.equal(reads, 0, 'An inactive or absent plan section must not query');
+  present = true;
+  const pending = timer();
+  assert.equal(reads, 1);
+  await timer();
+  context.collab.startPollingFallback();
+  await timer();
+  assert.equal(reads, 1, 'Slow reads stay exclusive even after restarting the timer');
+  finishRead(null);
+  await pending;
+  const failed = timer();
+  assert.equal(reads, 2, 'Visible polling resumes after a completed read');
+  rejectRead(new Error('Fixture storage failure'));
+  await failed;
+  const recovered = timer();
+  assert.equal(reads, 3, 'A failed read must not leave polling locked');
+  finishRead(null);
+  await recovered;
+  assert.equal(context.collab.pollInFlight, false);
+});

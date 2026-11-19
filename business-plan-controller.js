@@ -2546,6 +2546,7 @@ const PlanRealtimeCollab = {
   isSubscribed: false,
   peerPresence: {},
   pollTimer: null,
+  pollInFlight: false,
   lastRemoteSyncTs: 0,
   _toastTimeout: null,
 
@@ -2806,6 +2807,12 @@ const PlanRealtimeCollab = {
     if (typeof setInterval === 'undefined') return;
     clearInterval(this.pollTimer);
     this.pollTimer = setInterval(async () => {
+      if (this.pollInFlight) return;
+      if (typeof document !== 'undefined') {
+        const planView = document.getElementById('tab-plan');
+        if (document.hidden || !planView || planView.hidden || planView.classList.contains('hidden')) return;
+      }
+      this.pollInFlight = true;
       try {
         const remoteData = await fetchPlanStateFromCloud();
         if (remoteData) {
@@ -2829,7 +2836,10 @@ const PlanRealtimeCollab = {
             this.lastRemoteSyncTs = Math.max(this.lastRemoteSyncTs, remoteTs);
           }
         }
-      } catch (e) {}
+      } catch (e) {
+      } finally {
+        this.pollInFlight = false;
+      }
     }, 4500);
   }
 };
