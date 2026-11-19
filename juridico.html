@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
+  <meta name="radar-legal-version" content="0.2">
   <title>Documentos jurídicos | Radar São José</title>
   <style>
     * { box-sizing: border-box; }
@@ -14,7 +15,7 @@
     h1, h2, h3 { line-height: 1.25; }
     a { color: #174586; text-underline-offset: .18em; }
     nav ul { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; list-style: none; padding: 0; }
-    .draft { background: #fff4d2; color: #573a00; padding: .75rem; border-radius: .5rem; }
+    .document-status { background: #fff4d2; color: #573a00; padding: .75rem; border-radius: .5rem; }
     .table-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: .92rem; }
     th, td { padding: .5rem; border: 1px solid #cbd5e1; text-align: left; vertical-align: top; }
@@ -35,7 +36,7 @@
   <header>
     <a class="screen-only" href="index.html">Voltar ao Radar São José</a>
     <h1>Documentos jurídicos</h1>
-    <p class="draft"><strong>Minuta consolidada v0.2 · 05/11/2026.</strong> Texto para teste e revisão da advogada. Sem vigência.</p>
+    <p class="document-status"><strong>Versão 0.2 · 05/11/2026.</strong> Documento aprovado para publicação.</p>
     <nav aria-label="Documentos">
       <ul>
         <li><a href="#termos">Termos de Uso</a></li>
@@ -44,9 +45,7 @@
         <li><a href="#cookies">Cookies</a></li>
         <li><a href="#sla">SLA e Suporte</a></li>
         <li><a href="#uso-aceitavel">Uso aceitável</a></li>
-        <li><a href="#revisao">Notas de revisão</a></li>
         <li><a href="#fornecedores">Fornecedores</a></li>
-        <li><a href="#simulacao">Simular aceite</a></li>
       </ul>
     </nav>
     <button type="button" id="print-documents">Imprimir ou salvar em PDF</button>
@@ -380,39 +379,9 @@
     <h3 id="fornecedores-5">5. Limite de responsabilidade</h3>
     <p id="fornecedores-5-1"><strong>5.1.</strong> A responsabilidade do Radar sob este Anexo está sujeita às limitações da cláusula 10 dos Termos de Uso, na extensão permitida pela lei.</p>
   </section>
-  <section id="revisao">
-    <h2>Notas de revisão da minuta</h2>
-    <ul>
-      <li><strong>Termos.</strong> Revisar a limitação de responsabilidade empresarial, a cláusula de confidencialidade, a eleição de foro e as regras de uso dos materiais e fontes de terceiros. A sanção automática por anuidade saiu desta proposta.</li>
-      <li><strong>Condições comerciais.</strong> Prazo de 30 dias para aviso prévio é proposta de trabalho. Validar critério de reajuste, regras de parcelas no upgrade, baixa e estorno, emissão fiscal e meios de cobrança com o Asaas. Separar protocolo de arrependimento, desligamento de renovação e encerramento de conta.</li>
-      <li><strong>Privacidade e cookies.</strong> Validar bases por finalidade, prazo por categoria, registros de acesso, método para exercício de direitos e incidente, ferramenta de e-mail, inventário e testes de rede antes de ativar tags. Confirmar formulário e registros de autorização da pesquisa, dados exibidos no painel de mídia, e qualificação formal da função de privacidade.</li>
-      <li><strong>SLA e fornecedores.</strong> Confirmar janela de atendimento, fornecedores ativos, papéis, regiões, transferências, monitoramento e recuperação. As metas numéricas e créditos do documento-base dependem de validação técnica e decisão comercial.</li>
-      <li><strong>Implementação.</strong> Antes da vigência, validar a versão e o aceite afirmativo com registro por pedido, preferências opcionais separadas, retirada de consentimento, cancelamento, estorno, aviso de renovação, atendimento de privacidade e testes em homologação. A demonstração abaixo não equivale a aceite contratual.</li>
-    </ul>
-    <p>Referências de revisão: <a href="https://www2.camara.leg.br/legin/fed/lei/1990/lei-8078-11-setembro-1990-365086-normaatualizada-pl.html">CDC</a> · <a href="https://www2.camara.leg.br/legin/fed/decret/2013/decreto-7962-15-marco-2013-775557-norma-pe.html">Decreto do comércio eletrônico</a> · <a href="https://www.gov.br/anpd/pt-br/assuntos/assuntos-internacionais/transferencia-internacional-de-dados">ANPD e transferências internacionais</a></p>
-  </section>
-  <section id="simulacao" class="screen-only">
-    <h2>Simulação de aceite da compra</h2>
-    <p>Este formulário é um teste de leitura e interação. Ele não envia dados nem inicia uma cobrança.</p>
-    <form id="legal-demo">
-      <label><input type="checkbox" required> Aceito os <a href="#termos">Termos de Uso</a> e as <a href="#condicoes">Condições Comerciais</a>.</label>
-      <label><input type="checkbox" id="demo-renewal"> Autorizo a renovação anual automática, sujeita a aviso prévio.</label>
-      <p>Leia também a <a href="#privacidade">Política de Privacidade</a> e o <a href="#sla">SLA e Suporte</a>.</p>
-      <button type="submit">Simular confirmação</button>
-    </form>
-    <p id="demo-result" role="status"></p>
-  </section>
 </main>
 <script>
   document.getElementById('print-documents').addEventListener('click', () => window.print());
-  const demo = document.getElementById('legal-demo');
-  const result = document.getElementById('demo-result');
-  demo.addEventListener('change', () => { result.textContent = ''; });
-  demo.addEventListener('submit', event => {
-    event.preventDefault();
-    const renewal = document.getElementById('demo-renewal').checked;
-    result.textContent = renewal ? 'Simulação concluída com renovação autorizada.' : 'Simulação concluída sem renovação automática.';
-  });
 </script>
 </body>
 </html>
