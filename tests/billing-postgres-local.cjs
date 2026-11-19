@@ -6,7 +6,13 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const crypto = require('node:crypto');
-const { PGlite } = require(path.join(process.env.LOCALAPPDATA, 'RadarSaoJose', 'tools', 'pglite-0.5.15', 'node_modules', '@electric-sql', 'pglite'));
+const pgliteRoots = [process.env.LOCALAPPDATA,
+  process.env.USERPROFILE && path.join(process.env.USERPROFILE, 'AppData/Local/Packages/OpenAI.Codex_2p2nqsd0c76g0/LocalCache/Local')];
+const pgliteDependency = pgliteRoots.filter(Boolean)
+  .map(root => path.join(root, 'RadarSaoJose/tools/pglite-0.5.15/node_modules/@electric-sql/pglite'))
+  .find(candidate => fs.existsSync(candidate));
+assert.ok(pgliteDependency, 'PGlite 0.5.15 local necessário; confira a instalação em RadarSaoJose/tools.');
+const { PGlite } = require(pgliteDependency);
 const migration = file => fs.readFileSync(path.join(__dirname, '..', 'data', 'migrations', file), 'utf8');
 const owner = '00000000-0000-4000-8000-000000000001';
 const other = '00000000-0000-4000-8000-000000000002';
