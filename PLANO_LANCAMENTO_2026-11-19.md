@@ -72,6 +72,8 @@ Novas frentes explícitas: desempenho/capacidade, viabilidade da hospedagem sem 
 
 ### Participação do Leonardo nesta fase
 
+Cache da pesquisa implementado e testado localmente em 19/11: snapshots privados por cinco minutos, deduplicação de leituras, limite de retenção e invalidação por configuração/versão. Autorizações e no-store das respostas preservados. Bateria completa passou com 75 testes, zero falhas/ignorados. Documentação: CACHE_PESQUISA_2026-11-19.md. Desempenho continua parcialmente aberto: homologação e carga real não concluídas; não atualizar percentuais como se estivessem comprovadas.
+
 Revisão do relatório paralelo recebida e registrada em REVISAO_DESEMPENHO_COORDENACAO_2026-11-19.md. Primeira otimização local na candidata: polling do plano suspenso quando página/seção oculta e sem leituras sobrepostas, mantendo 4,5s quando visível. Seis testes focados e sintaxe passaram. Nada publicado; redução real ainda não medida. Não aceitar como comprovadas as promessas de redução superior a 90% ou a causa única do excesso. Cache de autenticação já existe e a Mídia já reaproveita dados ao alternar abas na mesma sessão.
 
 - Agora: encaminhar o prompt à outra IA com acesso ao repositório e depois trazer o relatório; fornecer telas Usage do Supabase e aviso Vercel sem segredos.
