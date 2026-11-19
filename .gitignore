@@ -492,3 +492,4 @@ public-images/
 !data/migrations/024_private_survey_responses.sql
 
 !scripts/check-preview-release.cjs
+!tests/survey-cache.test.cjs
