@@ -541,6 +541,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   if (!supabaseClient && typeof initSupabase === "function") initSupabase();
+  supabaseClient?.auth?.onAuthStateChange?.(event => {
+    if (event === 'SIGNED_OUT') {
+      clearPrivateSessionState();
+      window.location.replace('login.html');
+    }
+  });
   await checkActiveSession();
 });
 
@@ -732,21 +738,29 @@ async function handleLogin(e) {
   return false;
 }
 
-async function handleLogout() {
+function clearPrivateSessionState() {
+  window.appState = { user: null, profile: null, role: 'usuario', plan_type: 'gratis' };
+  document.getElementById('dashboard-screen')?.classList.add('hidden');
   ++surveyRequest;
   if (dynamicChartsGrid) delete dynamicChartsGrid.dataset.publicSurvey;
   allSurveyRecords = [];
   window.allSurveyRecords = [];
   window.currentFilteredRecords = [];
   dynamicChartsGrid?.replaceChildren();
-  Object.values(chartInstances).forEach(chart => chart?.destroy());
+  Object.values(chartInstances).forEach(chart => { try { chart?.destroy(); } catch (_) {} });
   chartInstances = {};
-  window.clearPaidReport?.();
-  window.RadarReportUI?.render({ clear: clearExecutiveCharts });
-  localStorage.removeItem("userRole");
-  localStorage.removeItem("userName");
-  localStorage.removeItem("userEmail");
-  localStorage.removeItem("authProvider");
+  for (const clear of [() => window.clearPaidReport?.(),
+    () => window.RadarReportUI?.render({ clear: clearExecutiveCharts }),
+    () => window.clearMidiaSession?.()]) {
+    try { clear(); } catch (_) {}
+  }
+  for (const key of ['userRole', 'userPlan', 'userName', 'userEmail', 'authProvider']) {
+    try { localStorage.removeItem(key); } catch (_) {}
+  }
+}
+
+async function handleLogout() {
+  clearPrivateSessionState();
   if (supabaseClient) {
     try {
       await supabaseClient.auth.signOut();
@@ -756,6 +770,10 @@ async function handleLogout() {
   }
   window.location.replace("login.html");
 }
+
+window.addEventListener('pageshow', event => {
+  if (event.persisted) window.location.reload();
+});
 
 function setLoginLoading(isLoading) {
   btnLogin.disabled = isLoading;

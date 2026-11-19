@@ -12,6 +12,7 @@
   }
 
   let allMidiaRecords = [];
+  let midiaRequest = 0;
   let filteredMidiaRecords = [];
   let midiaChartInstances = {};
   let currentMidiaPage = 1;
@@ -196,6 +197,7 @@
   }
 
   async function fetchMidiaData() {
+    const request = ++midiaRequest;
     const isDemo = window.radarSupabaseConfig?.preview === true;
     if (!isDemo && !window.radarCanLoadModule?.('midia')) {
       document.getElementById('midia-loading-state')?.classList.add('hidden');
@@ -209,6 +211,7 @@
     if (!isDemo) {
       try {
         const { data: auth } = await supabaseClient.auth.getSession();
+        if (request !== midiaRequest) return;
         if (!auth.session?.access_token) throw new Error('Sessão indisponível');
         let cursor = null;
         do {
@@ -219,16 +222,19 @@
           });
           if (!response.ok) throw new Error('Dados de mídia indisponíveis');
           const page = await response.json();
+          if (request !== midiaRequest) return;
           data = data.concat(page.rows);
           cursor = page.next;
         } while (cursor);
       } catch {
+        if (request !== midiaRequest) return;
         showMidiaLoading(false);
         showMidiaError('Não foi possível carregar os dados de mídia.');
         return;
       }
     }
 
+    if (request !== midiaRequest) return;
     showMidiaLoading(false);
 
     if (data && data.length > 0) {
@@ -2516,6 +2522,18 @@
   }
 
   // Expor funções globalmente
+  window.clearMidiaSession = function() {
+    ++midiaRequest;
+    allMidiaRecords = [];
+    filteredMidiaRecords = [];
+    window.allMidiaRecords = [];
+    window.filteredMidiaRecords = [];
+    for (const chart of Object.values(midiaChartInstances)) {
+      try { chart?.destroy(); } catch (_) {}
+    }
+    midiaChartInstances = {};
+    document.getElementById('midia-dashboard-content')?.replaceChildren();
+  };
   window.fetchMidiaData = fetchMidiaData;
   window.renderMidiaDashboard = renderMidiaDashboard;
   window.resetMidiaFilters = resetMidiaFilters;

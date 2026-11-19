@@ -495,3 +495,4 @@ public-images/
 !tests/survey-cache.test.cjs
 !scripts/benchmark-survey-local.cjs
 !tests/recovery-mfa.test.cjs
+!tests/session-lifecycle.test.cjs
