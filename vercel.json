@@ -33,9 +33,377 @@
       ]
     }
   ],
-  "rewrites": [
-    { "source": "/artigos/:slug.html", "destination": "/artigo.html?slug=:slug" },
-    { "source": "/artigos/:slug", "destination": "/artigo.html?slug=:slug" },
-    { "source": "/artigo/:slug", "destination": "/artigo.html?slug=:slug" }
+  "rewrites": [],
+  "redirects": [
+    {
+      "source": "/artigos/:slug([^/.]+)",
+      "destination": "/artigos/:slug.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo/:slug([^/.]+)",
+      "destination": "/artigos/:slug.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "populacao-sao-jose-dos-campos-crescimento"
+        }
+      ],
+      "destination": "/artigos/populacao-sao-jose-dos-campos-crescimento.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "bairros-cresceram-sao-jose-dos-campos"
+        }
+      ],
+      "destination": "/artigos/bairros-cresceram-sao-jose-dos-campos.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "perfil-habitantes-sao-jose-dos-campos"
+        }
+      ],
+      "destination": "/artigos/perfil-habitantes-sao-jose-dos-campos.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "morar-sao-jose-dos-campos-migracao"
+        }
+      ],
+      "destination": "/artigos/morar-sao-jose-dos-campos-migracao.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "expansao-urbana-sao-jose-dos-campos-impactos"
+        }
+      ],
+      "destination": "/artigos/expansao-urbana-sao-jose-dos-campos-impactos.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "quanto-custa-morar-sao-jose-dos-campos"
+        }
+      ],
+      "destination": "/artigos/quanto-custa-morar-sao-jose-dos-campos.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "aluguel-sao-jose-dos-campos"
+        }
+      ],
+      "destination": "/artigos/aluguel-sao-jose-dos-campos.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "diferenca-morar-regioes-sao-jose-dos-campos"
+        }
+      ],
+      "destination": "/artigos/diferenca-morar-regioes-sao-jose-dos-campos.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "bairros-sao-jose-dos-campos-servicos"
+        }
+      ],
+      "destination": "/artigos/bairros-sao-jose-dos-campos-servicos.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "crescimento-imobiliario-desigualdade-sjc"
+        }
+      ],
+      "destination": "/artigos/crescimento-imobiliario-desigualdade-sjc.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "onde-estao-os-empregos-sao-jose-dos-campos"
+        }
+      ],
+      "destination": "/artigos/onde-estao-os-empregos-sao-jose-dos-campos.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "quais-setores-mais-contratam-sao-jose-dos-campos"
+        }
+      ],
+      "destination": "/artigos/quais-setores-mais-contratam-sao-jose-dos-campos.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "embraer-central-economia-sao-jose-dos-campos"
+        }
+      ],
+      "destination": "/artigos/embraer-central-economia-sao-jose-dos-campos.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "sao-jose-depende-industria-tecnologia-servicos"
+        }
+      ],
+      "destination": "/artigos/sao-jose-depende-industria-tecnologia-servicos.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "trabalho-moradia-sao-jose-dos-campos"
+        }
+      ],
+      "destination": "/artigos/trabalho-moradia-sao-jose-dos-campos.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "por-que-sao-jose-ciencia-tecnologia"
+        }
+      ],
+      "destination": "/artigos/por-que-sao-jose-ciencia-tecnologia.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "conexao-ita-inpe-embraer-parque"
+        }
+      ],
+      "destination": "/artigos/conexao-ita-inpe-embraer-parque.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "tecnologia-sao-jose-dos-campos"
+        }
+      ],
+      "destination": "/artigos/tecnologia-sao-jose-dos-campos.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "inovacao-empregos-empresas"
+        }
+      ],
+      "destination": "/artigos/inovacao-empregos-empresas.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "cursos-de-tecnologia-sjc"
+        }
+      ],
+      "destination": "/artigos/cursos-de-tecnologia-sjc.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "como-moradores-se-deslocam-sjc"
+        }
+      ],
+      "destination": "/artigos/como-moradores-se-deslocam-sjc.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "via-dutra-aproxima-ou-divide-sjc"
+        }
+      ],
+      "destination": "/artigos/via-dutra-aproxima-ou-divide-sjc.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "sjc-preparada-crescimento-populacao"
+        }
+      ],
+      "destination": "/artigos/sjc-preparada-crescimento-populacao.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "quem-depende-transporte-publico-sjc"
+        }
+      ],
+      "destination": "/artigos/quem-depende-transporte-publico-sjc.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "conexoes-distancias-sjc-regioes"
+        }
+      ],
+      "destination": "/artigos/conexoes-distancias-sjc-regioes.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "onde-estao-hospitais-unidades-sjc"
+        }
+      ],
+      "destination": "/artigos/onde-estao-hospitais-unidades-sjc.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "acesso-saude-regioes-sjc"
+        }
+      ],
+      "destination": "/artigos/acesso-saude-regioes-sjc.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "problemas-apontados-moradores-sjc"
+        }
+      ],
+      "destination": "/artigos/problemas-apontados-moradores-sjc.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "riscos-ambientais-sjc-clima-enchentes-calor"
+        }
+      ],
+      "destination": "/artigos/riscos-ambientais-sjc-clima-enchentes-calor.html",
+      "permanent": true
+    },
+    {
+      "source": "/artigo.html",
+      "has": [
+        {
+          "type": "query",
+          "key": "slug",
+          "value": "indicadores-qualidade-vida-sjc"
+        }
+      ],
+      "destination": "/artigos/indicadores-qualidade-vida-sjc.html",
+      "permanent": true
+    }
   ]
 }

@@ -19,4 +19,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://radarsaojose.com.br/sitemap.xml
+Sitemap: https://radarsaojose.vercel.app/sitemap.xml

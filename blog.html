@@ -6,7 +6,7 @@
   <title>Portal de Notícias & Inteligência de Dados | Radar São José</title>
   <meta name="description" content="Portal oficial de jornalismo de dados, análises demográficas, econômicas e pesquisas municipais em São José dos Campos e Vale do Paraíba." />
   <meta name="keywords" content="portal de notícias são josé dos campos, população sjc, economia sjc, pesquisas de mercado sjc, big data sjc, radar são josé, inteligência de mercado sjc" />
-  <link rel="canonical" href="https://radarsaojose.com.br/blog.html" />
+  <link rel="canonical" href="https://radarsaojose.vercel.app/blog.html" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico?v=radar-rd-2" />
@@ -17,9 +17,9 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Portal de Notícias & Inteligência de Dados | Radar São José" />
   <meta property="og:description" content="Reportagens, indicadores e pesquisas sobre demografia, economia, inovação e consumo em São José dos Campos." />
-  <meta property="og:url" content="https://radarsaojose.com.br/blog.html" />
+  <meta property="og:url" content="https://radarsaojose.vercel.app/blog.html" />
   <meta property="og:site_name" content="Radar São José" />
-  <meta property="og:image" content="https://radarsaojose.com.br/mais_fotos_radar/pexels-thisisengineering-3861976.jpg" />
+  <meta property="og:image" content="https://radarsaojose.vercel.app/mais_fotos_radar/pexels-thisisengineering-3861976.jpg" />
 
   <!-- Google Fonts: Montserrat + Merriweather -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -57,10 +57,10 @@
   {
     "@context": "https://schema.org",
     "@type": "NewsMediaOrganization",
-    "@id": "https://radarsaojose.com.br/#publisher",
+    "@id": "https://radarsaojose.vercel.app/#publisher",
     "name": "Radar São José",
-    "url": "https://radarsaojose.com.br/blog.html",
-    "logo": "https://radarsaojose.com.br/fotos_radar/logo.png",
+    "url": "https://radarsaojose.vercel.app/blog.html",
+    "logo": "https://radarsaojose.vercel.app/fotos_radar/logo.png",
     "sameAs": [
       "https://www.linkedin.com/in/leonardo-venancio",
       "https://github.com/venancioproject-prog"
@@ -295,6 +295,7 @@
   <link rel="stylesheet" href="header-brand.css?v=20261102-alinhamento" />
   <link rel="stylesheet" href="header-menu.css?v=20261105-mobile-cta">
   <script src="header-menu.js?v=20261105" defer></script>
+<script src="/blog-editorial.js?v=20261120"></script>
 </head>
 <body class="bg-white text-slate-900 font-sans antialiased">
 
@@ -502,60 +503,47 @@
           <div>
             <!-- Metadados da Matéria (Tempo de leitura e Data) -->
             <div class="flex flex-wrap items-center gap-2 text-xs text-slate-500 mb-3">
-              <span id="heroReadingTime" class="font-medium flex items-center gap-1">
-                <i class="fa-regular fa-clock text-slate-400"></i> -- min de leitura
-              </span>
+              <span id="heroReadingTime" class="font-medium flex items-center gap-1">7 min de leitura</span>
               <span class="text-slate-300">•</span>
-              <span id="heroDate" class="font-medium">
-                Conectando ao Radar SJC...
-              </span>
+              <span id="heroDate" class="font-medium">20 de novembro de 2026</span>
             </div>
 
             <!-- Grande Título da Manchete -->
             <h2 class="text-2xl sm:text-3xl lg:text-[34px] font-black font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-[1.25] mb-3">
-              <a id="heroTitleLink" href="#" class="hover:underline decoration-red-600 decoration-2 underline-offset-4 block">
-                <span class="inline-block h-8 bg-slate-200 rounded-lg animate-pulse w-11/12 mb-2"></span>
-                <span class="inline-block h-8 bg-slate-200 rounded-lg animate-pulse w-3/4"></span>
-              </a>
+              <a id="heroTitleLink" href="/artigos/populacao-sao-jose-dos-campos-crescimento.html" class="hover:underline decoration-red-600 decoration-2 underline-offset-4 block">São José cresceu e envelheceu: o retrato do Censo 2022</a>
             </h2>
 
             <!-- Linha Fina / Subtítulo Explicativo -->
-            <p id="heroSubtitle" class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6 font-sans">
-              <span class="block h-4 bg-slate-100 rounded animate-pulse w-full mb-2"></span>
-              <span class="block h-4 bg-slate-100 rounded animate-pulse w-2/3"></span>
-            </p>
+            <p id="heroSubtitle" class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6 font-sans">A cidade ganhou 67 mil habitantes entre 2010 e 2022. O Censo mostra como o crescimento se distribuiu pelas regiões e como mudou a composição etária dos moradores.</p>
           </div>
 
           <!-- Foto de Destaque da Manchete (ABAIXO DA MANCHETE) -->
-          <a id="heroImageLink" href="#" class="block relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-slate-100 mb-6 shadow-inner">
-            <div id="heroImageSkeleton" class="w-full h-full bg-slate-200 animate-pulse flex flex-col items-center justify-center text-slate-400 gap-2">
-              <i class="fa-regular fa-image text-4xl opacity-30"></i>
-              <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">Carregando imagem de capa...</span>
-            </div>
-            <img id="heroImage" src="" alt="Radar São José dos Campos" class="hidden w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="eager" />
+          <a id="heroImageLink" href="/artigos/populacao-sao-jose-dos-campos-crescimento.html" class="block relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-slate-100 mb-6 shadow-inner">
+            <div id="heroImageSkeleton" class="hidden w-full h-full bg-slate-200 animate-pulse flex flex-col items-center justify-center text-slate-400 gap-2"></div>
+            <img id="heroImage" src="/web-media/blog/pexels-13631997.webp" alt="Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="eager" />
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </a>
 
           <!-- Rodapé do Card da Manchete: Botão + Autor -->
           <div class="flex flex-col sm:flex-row sm:items-center justify-between pt-4 border-t border-slate-100 gap-3">
-            <a id="heroCtaBtn" href="#" class="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-2.5 rounded-lg shadow-2xs hover:shadow transition-all">
+            <a id="heroCtaBtn" href="/artigos/populacao-sao-jose-dos-campos-crescimento.html" class="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-2.5 rounded-lg shadow-2xs hover:shadow transition-all">
               Ler Matéria Completa <i class="fa-solid fa-arrow-right text-xs"></i>
             </a>
             
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
-              <img id="heroAuthorAvatar" src="fotos_radar/LEONARDO.jpeg" alt="Radar São José" class="w-7 h-7 rounded-full object-cover ring-2 ring-slate-100" loading="lazy" />
+              <img id="heroAuthorAvatar" src="fotos_radar/logo.png" alt="Radar São José" class="w-7 h-7 rounded-full object-cover ring-2 ring-slate-100" loading="lazy" />
               <span>Por <strong id="heroAuthorName">Redação Radar SJC</strong></span>
             </div>
           </div>
 
         </article>
 
-        <!-- BARRA LATERAL EDITORIAL (MAIS LIDAS EM SJC - TOP 6) -->
+        <!-- BARRA LATERAL EDITORIAL (LEITURAS EM DESTAQUE - TOP 6) -->
         <aside class="lg:col-span-4 flex flex-col justify-between gap-3">
           <div class="flex items-center justify-between pb-2.5 border-b border-slate-200 mb-1">
             <div class="flex items-center gap-2">
               <div class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></div>
-              <h3 class="text-xs font-black uppercase tracking-widest text-slate-900">MAIS LIDAS EM SJC</h3>
+              <h3 class="text-xs font-black uppercase tracking-widest text-slate-900">LEITURAS EM DESTAQUE</h3>
             </div>
             <span class="text-[11px] text-slate-500 font-bold uppercase tracking-wider">Top Leituras</span>
           </div>
@@ -686,7 +674,7 @@
         <h2 class="text-2xl sm:text-3xl font-bold font-serif text-slate-900 mt-1" id="feedMainTitle">Matérias e Pesquisas de Inteligência</h2>
       </div>
       <div class="text-xs text-slate-500">
-        Mostrando <span id="articleCount" class="font-bold text-slate-900">...</span> análises especializadas
+        Mostrando <span id="articleCount" class="font-bold text-slate-900">30</span> análises especializadas
       </div>
     </div>
 
@@ -707,109 +695,37 @@
 
     <!-- Grid de Artigos (Skeletons de Carregamento Neutro) -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="articlesGrid">
-      <div class="article-skeleton flex flex-col justify-between border-b border-slate-200/80 pb-6 animate-pulse">
-        <div>
-          <div class="aspect-[16/10] bg-slate-200 rounded-lg mb-3.5"></div>
-          <div class="h-3 w-28 bg-slate-200 rounded mb-2.5"></div>
-          <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
-          <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
-          <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
-          <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
-        </div>
-        <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-4">
-          <div class="flex items-center gap-2">
-            <div class="w-5 h-5 rounded-full bg-slate-200"></div>
-            <div class="h-3 w-20 bg-slate-200 rounded"></div>
-          </div>
-          <div class="h-3 w-10 bg-slate-200 rounded"></div>
-        </div>
-      </div>
-      <div class="article-skeleton flex flex-col justify-between border-b border-slate-200/80 pb-6 animate-pulse">
-        <div>
-          <div class="aspect-[16/10] bg-slate-200 rounded-lg mb-3.5"></div>
-          <div class="h-3 w-28 bg-slate-200 rounded mb-2.5"></div>
-          <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
-          <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
-          <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
-          <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
-        </div>
-        <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-4">
-          <div class="flex items-center gap-2">
-            <div class="w-5 h-5 rounded-full bg-slate-200"></div>
-            <div class="h-3 w-20 bg-slate-200 rounded"></div>
-          </div>
-          <div class="h-3 w-10 bg-slate-200 rounded"></div>
-        </div>
-      </div>
-      <div class="article-skeleton flex flex-col justify-between border-b border-slate-200/80 pb-6 animate-pulse">
-        <div>
-          <div class="aspect-[16/10] bg-slate-200 rounded-lg mb-3.5"></div>
-          <div class="h-3 w-28 bg-slate-200 rounded mb-2.5"></div>
-          <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
-          <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
-          <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
-          <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
-        </div>
-        <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-4">
-          <div class="flex items-center gap-2">
-            <div class="w-5 h-5 rounded-full bg-slate-200"></div>
-            <div class="h-3 w-20 bg-slate-200 rounded"></div>
-          </div>
-          <div class="h-3 w-10 bg-slate-200 rounded"></div>
-        </div>
-      </div>
-      <div class="article-skeleton flex flex-col justify-between border-b border-slate-200/80 pb-6 animate-pulse hidden md:flex">
-        <div>
-          <div class="aspect-[16/10] bg-slate-200 rounded-lg mb-3.5"></div>
-          <div class="h-3 w-28 bg-slate-200 rounded mb-2.5"></div>
-          <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
-          <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
-          <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
-          <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
-        </div>
-        <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-4">
-          <div class="flex items-center gap-2">
-            <div class="w-5 h-5 rounded-full bg-slate-200"></div>
-            <div class="h-3 w-20 bg-slate-200 rounded"></div>
-          </div>
-          <div class="h-3 w-10 bg-slate-200 rounded"></div>
-        </div>
-      </div>
-      <div class="article-skeleton flex flex-col justify-between border-b border-slate-200/80 pb-6 animate-pulse hidden lg:flex">
-        <div>
-          <div class="aspect-[16/10] bg-slate-200 rounded-lg mb-3.5"></div>
-          <div class="h-3 w-28 bg-slate-200 rounded mb-2.5"></div>
-          <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
-          <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
-          <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
-          <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
-        </div>
-        <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-4">
-          <div class="flex items-center gap-2">
-            <div class="w-5 h-5 rounded-full bg-slate-200"></div>
-            <div class="h-3 w-20 bg-slate-200 rounded"></div>
-          </div>
-          <div class="h-3 w-10 bg-slate-200 rounded"></div>
-        </div>
-      </div>
-      <div class="article-skeleton flex flex-col justify-between border-b border-slate-200/80 pb-6 animate-pulse hidden lg:flex">
-        <div>
-          <div class="aspect-[16/10] bg-slate-200 rounded-lg mb-3.5"></div>
-          <div class="h-3 w-28 bg-slate-200 rounded mb-2.5"></div>
-          <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
-          <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
-          <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
-          <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
-        </div>
-        <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-4">
-          <div class="flex items-center gap-2">
-            <div class="w-5 h-5 rounded-full bg-slate-200"></div>
-            <div class="h-3 w-20 bg-slate-200 rounded"></div>
-          </div>
-          <div class="h-3 w-10 bg-slate-200 rounded"></div>
-        </div>
-      </div>
-        </div>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/populacao-sao-jose-dos-campos-crescimento.html"><img src="/web-media/blog/pexels-13631997-720.webp" alt="Prédios residenciais e vegetação em paisagem urbana" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Demografia &amp; População</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">São José cresceu e envelheceu: o retrato do Censo 2022</h3><p class="text-sm text-slate-600 leading-relaxed">A cidade ganhou 67 mil habitantes entre 2010 e 2022.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/bairros-cresceram-sao-jose-dos-campos.html"><img src="/web-media/blog/pexels-6277731-720.webp" alt="Vista ampla de edifícios e ocupação urbana" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Saúde, Ambiente &amp; Cidade</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Oeste e Sudeste lideram o crescimento populacional de São José</h3><p class="text-sm text-slate-600 leading-relaxed">As duas regiões tiveram as maiores altas percentuais entre 2010 e 2022.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 6 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/perfil-habitantes-sao-jose-dos-campos.html"><img src="/web-media/blog/pexels-30144254-720.webp" alt="Casal de idosos caminhando em um parque arborizado" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Demografia &amp; População</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Quem mora em São José? Idade e região desenham o perfil da cidade</h3><p class="text-sm text-slate-600 leading-relaxed">O número de moradores com 65 anos ou mais mais que dobrou entre 2010 e 2022. Sul e Leste reuniam cerca de seis em cada dez habitantes, segundo o Censo.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 6 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/morar-sao-jose-dos-campos-migracao.html"><img src="/web-media/blog/pexels-8730053-720.webp" alt="Família organizando caixas durante uma mudança de casa" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Demografia &amp; População</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Censo 2022: São José recebeu 43,7 mil moradores em cinco anos</h3><p class="text-sm text-slate-600 leading-relaxed">O levantamento identifica pessoas que viviam em outro município cinco anos antes.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 6 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="moradia"><a href="/artigos/expansao-urbana-sao-jose-dos-campos-impactos.html"><img src="/web-media/blog/pexels-6277731-720.webp" alt="Vista ampla de edifícios e ocupação urbana" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Imobiliário &amp; Moradia</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Como a expansão urbana transforma as regiões de São José</h3><p class="text-sm text-slate-600 leading-relaxed">O avanço populacional no Oeste e no Sudeste acompanha uma cidade formada por eixos e distâncias.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 6 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="moradia"><a href="/artigos/quanto-custa-morar-sao-jose-dos-campos.html"><img src="/web-media/blog/pexels-6964105-720.webp" alt="Casal conferindo contas domésticas com calculadora e computador" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Imobiliário &amp; Moradia</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Quanto custa morar em São José? Uma conta de aluguel e ônibus</h3><p class="text-sm text-slate-600 leading-relaxed">Uma simulação com preços anunciados de aluguel e tarifa de ônibus chega a cerca de R$ 2,7 mil.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="moradia"><a href="/artigos/aluguel-sao-jose-dos-campos.html"><img src="/web-media/blog/pexels-4246119-720.webp" alt="Caixas de mudança em uma sala iluminada" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Imobiliário &amp; Moradia</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Aluguel em São José: onde os anúncios são mais caros</h3><p class="text-sm text-slate-600 leading-relaxed">Um levantamento de abril de 2026 encontrou valores mais altos em Jardim Aquarius e Vila Ema.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/diferenca-morar-regioes-sao-jose-dos-campos.html"><img src="/web-media/blog/pexels-13631997-720.webp" alt="Prédios residenciais e vegetação em paisagem urbana" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Saúde, Ambiente &amp; Cidade</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">O que muda entre as regiões de São José dos Campos</h3><p class="text-sm text-slate-600 leading-relaxed">Sul e Leste concentram moradores, enquanto Oeste e Sudeste cresceram mais depressa entre 2010 e 2022.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/bairros-sao-jose-dos-campos-servicos.html"><img src="/web-media/blog/pexels-35873327-720.webp" alt="Pessoas e ciclistas em um parque, com prédios ao fundo" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Saúde, Ambiente &amp; Cidade</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Como os serviços se distribuem pelos bairros de São José</h3><p class="text-sm text-slate-600 leading-relaxed">O Centro reúne serviços de alcance municipal, e outras regiões têm polos próprios.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/crescimento-imobiliario-desigualdade-sjc.html"><img src="/web-media/blog/pexels-13631997-720.webp" alt="Prédios residenciais e vegetação em paisagem urbana" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Saúde, Ambiente &amp; Cidade</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Moradia e desigualdade: os caminhos da expansão de São José</h3><p class="text-sm text-slate-600 leading-relaxed">O crescimento populacional e a localização dos conjuntos habitacionais revelam mapas distintos.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 6 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="emprego"><a href="/artigos/onde-estao-os-empregos-sao-jose-dos-campos.html"><img src="/web-media/blog/pexels-32845694-720.webp" alt="Profissional com equipamento de proteção usando um tablet em uma fábrica" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Economia &amp; Empregos</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Onde estão os empregos em São José? O mapa de 2017 dá pistas</h3><p class="text-sm text-slate-600 leading-relaxed">Registros da RAIS de 2017 apontam concentração no Centro e em corredores viários.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 6 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="emprego"><a href="/artigos/quais-setores-mais-contratam-sao-jose-dos-campos.html"><img src="/web-media/blog/pexels-32845694-720.webp" alt="Profissional com equipamento de proteção usando um tablet em uma fábrica" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Economia &amp; Empregos</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Serviços lideram o emprego formal em São José dos Campos</h3><p class="text-sm text-slate-600 leading-relaxed">O setor reunia 52,8% dos vínculos formais em abril de 2026.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 8 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="emprego"><a href="/artigos/embraer-central-economia-sao-jose-dos-campos.html"><img src="/web-media/blog/pexels-13271050-720.webp" alt="Aeronave comercial em manutenção dentro de um hangar" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Economia &amp; Empregos</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">O papel da Embraer na economia de São José dos Campos</h3><p class="text-sm text-slate-600 leading-relaxed">A fabricante nasceu na cidade e segue ligada à produção e à rede de empresas aeroespaciais.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="emprego"><a href="/artigos/sao-jose-depende-industria-tecnologia-servicos.html"><img src="/web-media/blog/pexels-32845694-720.webp" alt="Profissional com equipamento de proteção usando um tablet em uma fábrica" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Economia &amp; Empregos</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Indústria ou serviços: o que move a economia de São José?</h3><p class="text-sm text-slate-600 leading-relaxed">Na divisão setorial do IBGE referente a 2021, serviços respondiam por 50,1% do valor adicionado e a indústria, por 42,4%.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="emprego"><a href="/artigos/trabalho-moradia-sao-jose-dos-campos.html"><img src="/web-media/blog/pexels-17628012-720.webp" alt="Ônibus urbano em um ponto de embarque de passageiros" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Economia &amp; Empregos</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">De casa ao trabalho: o que o Censo revela sobre São José</h3><p class="text-sm text-slate-600 leading-relaxed">Na tabulação municipal do Censo 2022, 63,31% das pessoas do grupo analisado levavam até meia hora ao trabalho principal.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 6 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="tecnologia"><a href="/artigos/por-que-sao-jose-ciencia-tecnologia.html"><img src="/web-media/blog/pexels-13271050-720.webp" alt="Aeronave comercial em manutenção dentro de um hangar" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Inovação &amp; Tecnologia</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Como São José se tornou um polo de ciência e tecnologia</h3><p class="text-sm text-slate-600 leading-relaxed">CTA e ITA vieram antes da Embraer. A trajetória do INPE e do Parque Tecnológico completa a história das instituições que ajudaram a formar o polo local.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/conexao-ita-inpe-embraer-parque.html"><img src="/web-media/blog/pexels-4033020-720.webp" alt="Pessoa examinando amostras com um microscópio em laboratório" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Saúde, Ambiente &amp; Cidade</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Como ITA, INPE, Embraer e Parque Tecnológico se conectam</h3><p class="text-sm text-slate-600 leading-relaxed">Um programa de formação une ITA e Embraer desde 2001.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="tecnologia"><a href="/artigos/tecnologia-sao-jose-dos-campos.html"><img src="/web-media/blog/pexels-13271050-720.webp" alt="Aeronave comercial em manutenção dentro de um hangar" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Inovação &amp; Tecnologia</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">O peso do setor aeroespacial nas exportações de São José</h3><p class="text-sm text-slate-600 leading-relaxed">Segundo a divulgação municipal, aeronaves, helicópteros e satélites representaram cerca de 72% das exportações da cidade em 2025.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="tecnologia"><a href="/artigos/inovacao-empregos-empresas.html"><img src="/web-media/blog/pexels-4033020-720.webp" alt="Pessoa examinando amostras com um microscópio em laboratório" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Inovação &amp; Tecnologia</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Da pesquisa ao mercado: um caminho da inovação em São José</h3><p class="text-sm text-slate-600 leading-relaxed">A trajetória da Subiter passa pelo ITA, pela incubação no Parque Tecnológico e por aplicações na indústria.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/cursos-de-tecnologia-sjc.html"><img src="/web-media/blog/pexels-35571660-720.webp" alt="Estudantes em aula em um laboratório de informática" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Saúde, Ambiente &amp; Cidade</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Cursos de tecnologia em São José: opções e formas de ingresso</h3><p class="text-sm text-slate-600 leading-relaxed">IFSP, Cephas e Qualifica São José oferecem formações com durações e requisitos diferentes.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="mobilidade"><a href="/artigos/como-moradores-se-deslocam-sjc.html"><img src="/web-media/blog/pexels-17628012-720.webp" alt="Ônibus urbano em um ponto de embarque de passageiros" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Mobilidade &amp; Infraestrutura</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Como São José se desloca? O retrato de 2011 e a pesquisa de 2026</h3><p class="text-sm text-slate-600 leading-relaxed">Carros e motos respondiam por 46,89% das viagens na Pesquisa Origem e Destino de 2011. O novo levantamento domiciliar de 2026 busca atualizar esse diagnóstico.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 6 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="mobilidade"><a href="/artigos/via-dutra-aproxima-ou-divide-sjc.html"><img src="/web-media/blog/pexels-40502228-720.webp" alt="Vista elevada de uma via urbana entre árvores e edifícios" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Mobilidade &amp; Infraestrutura</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Dutra em São José: conexão regional e barreira entre bairros</h3><p class="text-sm text-slate-600 leading-relaxed">A rodovia liga a cidade ao Vale do Paraíba, mas concentra as travessias urbanas em pontos específicos.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 6 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/sjc-preparada-crescimento-populacao.html"><img src="/web-media/blog/pexels-13631997-720.webp" alt="Prédios residenciais e vegetação em paisagem urbana" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Saúde, Ambiente &amp; Cidade</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Os serviços de São José acompanham o crescimento da cidade?</h3><p class="text-sm text-slate-600 leading-relaxed">A população aumentou em 67.133 pessoas entre 2010 e 2022.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 6 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="mobilidade"><a href="/artigos/quem-depende-transporte-publico-sjc.html"><img src="/web-media/blog/pexels-17628012-720.webp" alt="Ônibus urbano em um ponto de embarque de passageiros" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Mobilidade &amp; Infraestrutura</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Ônibus no trajeto ao trabalho: o que o Censo mostra em São José</h3><p class="text-sm text-slate-600 leading-relaxed">No Censo 2022, 83.797 pessoas indicaram o ônibus como o meio que ocupava mais tempo na ida ao trabalho.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/conexoes-distancias-sjc-regioes.html"><img src="/web-media/blog/pexels-40502228-720.webp" alt="Vista elevada de uma via urbana entre árvores e edifícios" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Saúde, Ambiente &amp; Cidade</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">As rodovias que ligam São José ao Vale, ao litoral e à serra</h3><p class="text-sm text-slate-600 leading-relaxed">Dutra e Carvalho Pinto atendem ao eixo do Vale; a Tamoios segue para o Litoral Norte. SP-50 e SP-123 oferecem acessos distintos à Mantiqueira.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/onde-estao-hospitais-unidades-sjc.html"><img src="/web-media/blog/pexels-10827916-720.webp" alt="Equipe de profissionais de saúde caminhando em um corredor hospitalar" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Saúde, Ambiente &amp; Cidade</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">UBS, urgência e hospitais: como se organiza a saúde em São José</h3><p class="text-sm text-slate-600 leading-relaxed">A rede básica tem endereços nas seis regiões da cidade.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/acesso-saude-regioes-sjc.html"><img src="/web-media/blog/pexels-10827916-720.webp" alt="Equipe de profissionais de saúde caminhando em um corredor hospitalar" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Saúde, Ambiente &amp; Cidade</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Atenção básica em São José: cobertura e meta para 2029</h3><p class="text-sm text-slate-600 leading-relaxed">O Plano Municipal de Saúde registra cobertura estimada de 61,63% em 2024 e meta de 70% em 2029. As fontes consultadas não detalham a cobertura por região.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 6 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/problemas-apontados-moradores-sjc.html"><img src="/web-media/blog/pexels-35873327-720.webp" alt="Pessoas e ciclistas em um parque, com prédios ao fundo" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Saúde, Ambiente &amp; Cidade</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Ouvidoria de São José: as reclamações e os prazos de resposta</h3><p class="text-sm text-slate-600 leading-relaxed">Árvores, transporte, sossego e escolas aparecem entre os temas destacados no relatório de 2025.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/riscos-ambientais-sjc-clima-enchentes-calor.html"><img src="/web-media/blog/pexels-26146718-720.webp" alt="Carro e ônibus atravessando uma rua alagada" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Saúde, Ambiente &amp; Cidade</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Enchentes e calor em São José: o que mostram os mapas</h3><p class="text-sm text-slate-600 leading-relaxed">Os documentos municipais identificam áreas de risco e simulam inundações em bacias específicas.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+<article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6" data-category="cidade"><a href="/artigos/indicadores-qualidade-vida-sjc.html"><img src="/web-media/blog/pexels-35873327-720.webp" alt="Pessoas e ciclistas em um parque, com prédios ao fundo" width="720" height="450" loading="lazy" decoding="async" class="w-full aspect-[16/9] object-cover rounded-xl mb-4"><span class="text-xs font-bold text-cyan-700">Saúde, Ambiente &amp; Cidade</span><h3 class="font-serif text-lg font-bold text-slate-900 leading-snug mt-2 mb-3">Qualidade de vida em São José: avanços e desafios no IPS 2026</h3><p class="text-sm text-slate-600 leading-relaxed">A cidade alcançou 68,31 pontos no Índice de Progresso Social.</p></a><p class="mt-4 text-xs text-slate-500">Radar São José · 7 min de leitura</p></article>
+</div>
       </div>
     </div>
 
@@ -1503,6 +1419,7 @@
     }
 
     function formatPortalDate(isoStr) {
+      if (/^\d{4}-\d{2}-\d{2}$/.test(String(isoStr))) return isoStr.split('-').reverse().join('/');
       if (!isoStr) return 'Recente';
       try {
         const d = new Date(isoStr);
@@ -1517,7 +1434,7 @@
     }
 
     function getArticleUrl(slug) {
-      return `artigo.html?slug=${encodeURIComponent(slug)}`;
+      return `/artigos/${encodeURIComponent(slug)}.html`;
     }
 
     function renderPortalArticleCard(post) {
@@ -1526,7 +1443,7 @@
       const readTime = (post.seo_metadata && post.seo_metadata.read_time) || '4 min de leitura';
       const author = post.author_name || 'Leonardo Venâncio';
       const isMayumi = author.toLowerCase().includes('mayumi');
-      const authorAvatarSrc = isMayumi ? 'fotos_radar/mayumi.jpg' : 'fotos_radar/LEONARDO.jpeg';
+      const authorAvatarSrc = isMayumi ? 'fotos_radar/mayumi.jpg' : 'fotos_radar/logo.png';
       const coverUrl = post.cover_image_url || 'web-media/capa_sjc_skyline-e75d8e49a056.webp';
       const articleUrl = getArticleUrl(post.slug);
       const excerpt = post.excerpt || (post.seo_metadata && post.seo_metadata.bluf_summary) || post.title;
@@ -1558,7 +1475,7 @@
 
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
             <div class="flex items-center gap-2">
-              <img src="${authorAvatarSrc}" alt="${author}" class="w-5 h-5 rounded-full object-cover ring-1 ring-slate-200" onerror="this.src='fotos_radar/LEONARDO.jpeg'" />
+              <img src="${authorAvatarSrc}" alt="${author}" class="w-5 h-5 rounded-full object-cover ring-1 ring-slate-200" onerror="this.src='fotos_radar/logo.png'" />
               <span class="font-medium text-slate-600">${author}</span>
             </div>
             <a href="${articleUrl}" class="font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
@@ -1621,7 +1538,7 @@
       const authorAvatar = document.getElementById('heroAuthorAvatar');
       if (authorAvatar) {
         const isMayumi = authorVal.toLowerCase().includes('mayumi');
-        authorAvatar.src = isMayumi ? 'fotos_radar/mayumi.jpg' : 'fotos_radar/LEONARDO.jpeg';
+        authorAvatar.src = isMayumi ? 'fotos_radar/mayumi.jpg' : 'fotos_radar/logo.png';
         authorAvatar.alt = authorVal;
       }
 
@@ -1700,7 +1617,7 @@
     // Hidratação Instantânea via Cache Local (se o usuário já acessou ou acabou de salvar no CRM)
     try {
       const cachedData = localStorage.getItem('radarsaojose_portal_posts_cache_v2');
-      if (cachedData) {
+      if (cachedData && !window.RADAR_EDITORIAL_POSTS) {
         const parsed = JSON.parse(cachedData);
         if (Array.isArray(parsed) && parsed.length > 0) {
           currentFingerprint = computeFingerprint(parsed);
@@ -1724,34 +1641,7 @@
     }
 
     async function fetchAndRenderPortalPosts() {
-      let posts = [];
-      try {
-        const supRes = await fetch(`${SUPABASE_BLOG_URL}/rest/v1/blog_posts?status=eq.published&order=published_at.desc&select=id,title,slug,excerpt,cover_image_url,status,published_at,created_at,updated_at,author_name,author_role,category,tags,is_featured,seo_metadata,views_count`, {
-          headers: {
-            'apikey': SUPABASE_BLOG_KEY,
-            'Authorization': `Bearer ${SUPABASE_BLOG_KEY}`
-          }
-        });
-        if (supRes.ok) {
-          posts = await supRes.json();
-        }
-      } catch (err) {
-        console.warn('[Portal] Supabase direct fetch warn:', err);
-      }
-
-      if (!posts || posts.length === 0) {
-        try {
-          const apiRes = await fetch('/api/posts?status=published&sortBy=published_at&order=desc&limit=100');
-          if (apiRes.ok) {
-            const data = await apiRes.json();
-            if (data && data.success && Array.isArray(data.posts)) {
-              posts = data.posts;
-            }
-          }
-        } catch (apiErr) {
-          console.warn('[Portal] API fallback warn:', apiErr);
-        }
-      }
+      const posts = window.RADAR_EDITORIAL_POSTS.slice();
 
       if (Array.isArray(posts) && posts.length > 0) {
         // Ordenação estrita: da última postada (mais recente) para a primeira

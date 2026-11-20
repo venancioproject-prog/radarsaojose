@@ -1,0 +1,688 @@
+{
+  "date": "2026-11-20",
+  "timezone": "America/Sao_Paulo",
+  "status": "central_claims_reviewed_with_limits",
+  "scope": "Revisão dos 30 artigos: afirmações centrais, números destacados, títulos, linhas finas, datas, universos estatísticos e referências. Não é auditoria exaustiva de cada frase ou resultado causal.",
+  "source_check": {
+    "unique_urls": 149,
+    "downloaded_http_200": 135,
+    "note": "HTTP 200 não significa validação; mapas interativos, PDFs de imagem e redirecionamentos exigiram tratamento separado. Falhas locais foram confrontadas também com busca web e fontes alternativas."
+  },
+  "corrections": [
+    {
+      "slug": "cursos-de-tecnologia-sjc",
+      "old": "As inscrições ocorreram de 28 de outubro a 18 de novembro de 2026, portanto já estavam encerradas na data desta consulta.",
+      "new": "Na consulta de 20 de novembro de 2026, a página oficial informava inscrições abertas até 4 de dezembro de 2026, às 23h59, com pagamento da taxa até 7 de dezembro. O cronograma foi atualizado; confira eventuais novas alterações no portal.",
+      "reason": "Prazo vigente no portal e errata nº 3 de 18/11/2026; evita informar encerramento incorreto."
+    },
+    {
+      "slug": "por-que-sao-jose-ciencia-tecnologia",
+      "old": "Em 1960, foi criado o grupo que deu origem ao instituto nacional de pesquisa espacial.",
+      "new": "O Grupo de Organização da Comissão Nacional de Atividades Espaciais (GOCNAE), que deu origem ao INPE, foi criado em 3 de agosto de 1961. [Registro histórico do INPE](https://www.inpe.br/noticias/noticia.php?Cod_Noticia=3350).",
+      "reason": "A proposta de 1960 foi confundida com a criação do GOCNAE em 1961."
+    },
+    {
+      "slug": "via-dutra-aproxima-ou-divide-sjc",
+      "old": "**Volume V: Crescimento Urbano e Industrialização em São José dos Campos**, 2018.",
+      "new": "**Volume V: Crescimento Urbano e Industrialização em São José dos Campos**, 2010.",
+      "reason": "2018 é parte do endereço de upload; ficha catalográfica e copyright identificam edição de 2010."
+    },
+    {
+      "slug": "bairros-sao-jose-dos-campos-servicos",
+      "old": "612, de 30 de dezembro de 2018",
+      "new": "612, de 30 de novembro de 2018",
+      "reason": "O texto promulgado e o Boletim 2503 confirmam novembro; página explicativa municipal contém erro."
+    },
+    {
+      "slug": "onde-estao-hospitais-unidades-sjc",
+      "old": "612, de 30 de dezembro de 2018",
+      "new": "612, de 30 de novembro de 2018",
+      "reason": "O texto promulgado e o Boletim 2503 confirmam novembro; página explicativa municipal contém erro."
+    },
+    {
+      "slug": "tecnologia-sao-jose-dos-campos",
+      "old": "São José dos Campos exportou US$ 4,061 bilhões em bens em 2025. Desse total, US$ 2,95 bilhões foram classificados no grupo de aviões, helicópteros e satélites, aproximadamente 73% das vendas externas do município.",
+      "new": "Segundo a divulgação municipal dos dados da Secretaria de Comércio Exterior, São José dos Campos exportou cerca de US$ 4,1 bilhões em bens em 2025. O grupo de aviões, helicópteros e satélites somou US$ 2,95 bilhões, aproximadamente 72% do total informado pela Prefeitura.",
+      "reason": "A fonte citada publica US$ 4,1 bilhões e 72%; o total mais preciso de US$ 4,061 bilhões não foi reproduzido no Comex Stat interativo."
+    },
+    {
+      "slug": "tecnologia-sao-jose-dos-campos",
+      "old": "Somados esses dois grupos, a cadeia aeronáutica responde por cerca de 78% do valor exportado.",
+      "new": "Somados, os valores divulgados para esses dois grupos equivalem a cerca de 77% do total arredondado de US$ 4,1 bilhões. É um cálculo com as categorias da publicação, não uma medição completa de toda a cadeia aeronáutica.",
+      "reason": "Recalcula participação com o mesmo denominador e evita equiparar dois grupos à cadeia inteira."
+    },
+    {
+      "slug": "onde-estao-os-empregos-sao-jose-dos-campos",
+      "old": "A atualização mais recente consultada confirma",
+      "new": "O balanço de janeiro a novembro de 2025 consultado confirma",
+      "reason": "Evita chamar números de 2025 de atualização mais recente quando já há divulgação de 2026."
+    },
+    {
+      "slug": "onde-estao-os-empregos-sao-jose-dos-campos",
+      "old": "O melhor mapa disponível dos empregos formais",
+      "new": "Um diagnóstico municipal dos empregos formais",
+      "reason": "A consulta confirma o diagnóstico histórico, mas não demonstra que seja o melhor mapa disponível."
+    },
+    {
+      "slug": "como-moradores-se-deslocam-sjc",
+      "old": "## O último retrato medido é de 2011",
+      "new": "## O retrato de 2011 reúne viagens de todos os motivos",
+      "reason": "O Censo 2022 já traz deslocamentos para trabalho; o diferencial da OD é o universo de viagens."
+    },
+    {
+      "slug": "como-moradores-se-deslocam-sjc",
+      "old": "A melhor resposta pública disponível à pergunta sobre como os joseenses se deslocam vem de uma pesquisa com 15 anos:",
+      "new": "A Pesquisa Origem e Destino de 2011 oferece um retrato histórico das viagens diárias de todos os motivos, diferente do recorte de trabalho do Censo 2022:",
+      "reason": "Delimita os universos sem afirmar inexistência de dados posteriores."
+    },
+    {
+      "slug": "acesso-saude-regioes-sjc",
+      "old": "O acesso à saúde em São José dos Campos não está resolvido de forma universal na atenção básica: o Plano Municipal de Saúde",
+      "new": "O Plano Municipal de Saúde",
+      "reason": "Cobertura potencial inferior a 100% não demonstra quantas pessoas conseguiram atendimento."
+    },
+    {
+      "slug": "acesso-saude-regioes-sjc",
+      "old": "p. 36",
+      "new": "p. 34 (página 35 do PDF)",
+      "reason": "Conferência visual e textual da tabela de metas no plano 2026–2029."
+    },
+    {
+      "slug": "bairros-cresceram-sao-jose-dos-campos",
+      "old": "Esses recortes não devem ser tratados como bairros urbanos.",
+      "new": "Esses recortes não devem ser tratados como bairros urbanos. Há uma divergência entre publicações municipais: esta notícia comparativa de 2024 registra 61.780 moradores no Norte e 15.372 na zona rural; a [página de população](https://www.sjc.sp.gov.br/servicos/governanca/populacao/) informa 61.940 e 15.212, respectivamente. Os totais municipais são iguais. A série de crescimento aqui mantém os valores da tabela comparativa, sem interpretar a diferença entre versões como mudança real de residentes.",
+      "reason": "Explicita divergência de 160 residentes entre duas publicações oficiais."
+    },
+    {
+      "slug": "populacao-sao-jose-dos-campos-crescimento",
+      "old": "A estimativa confirma o aumento do total municipal;",
+      "new": "A estimativa aponta um total municipal maior, sem substituir uma nova contagem censitária;",
+      "reason": "Estimativa e contagem censitária são operações diferentes."
+    },
+    {
+      "slug": "expansao-urbana-sao-jose-dos-campos-impactos",
+      "old": "A área municipal, de 1.099,61 quilômetros quadrados,",
+      "new": "A área municipal, de 1.099,494 quilômetros quadrados na base territorial de 2025 do IBGE,",
+      "reason": "Atualiza área e identifica o ano da base, em lugar do valor arredondado da página municipal."
+    },
+    {
+      "slug": "crescimento-imobiliario-desigualdade-sjc",
+      "old": "Pesquisadores da Universidade do Vale do Paraíba, em estudo publicado em 2020 sobre assentamentos precários e o bairro Rio Comprido, situam essa configuração em uma história de acesso desigual à terra urbana. O artigo cita dados municipais de 2018 sobre bairros irregulares e discute a relação entre preço da terra, renda e formas de ocupação. É uma análise de processos e de um estudo de caso, não uma medição atual da desigualdade em todos os bairros. Ainda assim, ajuda a compreender por que oferta formal e ocupação precária coexistem numa cidade industrializada e em expansão. [Reschilian, Silva e Maciel, “Dinâmicas socioterritoriais urbanas em assentamentos precários: um estudo de caso, São José dos Campos”, 2020](https://revistes.upc.edu/index.php/SIIU/article/view/10122/1739)",
+      "new": "Pesquisadores da Universidade do Vale do Paraíba analisaram a urbanização e a segregação socioespacial em um estudo de caso do Rio Comprido. O resumo identifica análise documental e trabalho de campo naquele bairro. Trata-se de uma investigação localizada, publicada em fevereiro de 2021 na edição de 2020 dos anais, e não de uma medição atual de todos os bairros. [Reschilian, Silva e Maciel, página editorial e resumo do estudo](https://revistes.upc.edu/index.php/SIIU/article/view/10122)",
+      "reason": "Texto integral apresentou falha de acesso; restringe a descrição ao resumo e corrige data editorial."
+    },
+    {
+      "slug": "crescimento-imobiliario-desigualdade-sjc",
+      "old": "https://revistes.upc.edu/index.php/SIIU/article/view/10122/1739",
+      "new": "https://revistes.upc.edu/index.php/SIIU/article/view/10122",
+      "reason": "Usa página editorial acessível em lugar do PDF indisponível nesta consulta."
+    },
+    {
+      "slug": "crescimento-imobiliario-desigualdade-sjc",
+      "old": "Anais do XII Seminário Internacional de Investigação em Urbanismo, 2020.",
+      "new": "Anais do XII Seminário Internacional de Investigação em Urbanismo, edição 2020; publicação em 2 de fevereiro de 2021.",
+      "reason": "Distingue ano da edição e data de publicação informada pelo periódico."
+    },
+    {
+      "slug": "bairros-sao-jose-dos-campos-servicos",
+      "old": "A lista atual da Secretaria Municipal de Saúde relaciona 40 UBS e cinco unidades avançadas, organizadas por região. Há 11 UBS na Leste e outras 11 na Sul; oito na Norte, quatro na Central, quatro na Sudeste e duas na Oeste. As cinco unidades avançadas ficam em áreas da Leste e da Sudeste. A distribuição confirma uma rede de atenção básica que não se limita ao Centro e aos bairros mais centrais.",
+      "new": "A página da Secretaria Municipal de Saúde apresenta uma divergência interna: o texto de abertura fala em 40 UBS, mas a contagem dos nomes na lista principal resulta em 41 registros, além de quatro Unidades Avançadas em seção separada. A relação principal traz quatro nomes na região Central, 12 na Leste, oito na Norte, dois na Oeste, quatro na Sudeste e 11 na Sul. Essa é uma contagem da página consultada em 20 de novembro de 2026, e não confirmação independente de quantas unidades estavam em operação. A lista distribui endereços pelas seis regiões.",
+      "reason": "Recontagem da lista oficial: 41 registros principais e quatro avançados; total de abertura está inconsistente."
+    },
+    {
+      "slug": "onde-estao-hospitais-unidades-sjc",
+      "old": "A página municipal relaciona 40 unidades básicas;",
+      "new": "O cabeçalho da página municipal informa 40 UBS, mas sua lista principal contém 41 nomes na consulta de 20 de novembro de 2026;",
+      "reason": "Evita reproduzir total divergente como contagem confirmada."
+    },
+    {
+      "slug": "onde-estao-hospitais-unidades-sjc",
+      "old": "A lista da Prefeitura distribui as 40 UBS assim: quatro na região Central, 11 na Leste, oito na Norte, duas na Oeste, quatro na Sudeste e 11 na Sul. A soma é uma contagem feita a partir dos nomes publicados. A mesma página relaciona outras cinco Unidades Avançadas, separadas da lista regular. A Prefeitura não as apresenta como UBS adicionais para efeito dessa contagem, embora a notícia municipal de 2024 as descreva como estruturas de Estratégia Saúde da Família. [1] [5]",
+      "new": "Na consulta de 20 de novembro de 2026, a lista principal da Prefeitura continha quatro nomes na região Central, 12 na Leste, oito na Norte, dois na Oeste, quatro na Sudeste e 11 na Sul: 41 registros ao todo. Outra seção relacionava quatro Unidades Avançadas. O cabeçalho, porém, ainda mencionava 40 UBS. A divergência impede tratar qualquer desses totais como inventário validado de unidades em operação. O artigo informa o conteúdo de cada parte da página e recomenda conferir o serviço específico antes do deslocamento. [1]",
+      "reason": "Corrige distribuição regional, separa lista e operação e explicita inconsistência na fonte."
+    },
+    {
+      "slug": "onde-estao-hospitais-unidades-sjc",
+      "old": "e as cinco Unidades Avançadas aparecem",
+      "new": "e as quatro Unidades Avançadas listadas aparecem",
+      "reason": "Atualiza quantidade de registros da seção de Unidades Avançadas."
+    },
+    {
+      "slug": "riscos-ambientais-sjc-clima-enchentes-calor",
+      "old": "A camada usa imagens Landsat de 2014 a 2025, com pixels de 30 metros, e compara a temperatura de cada ponto com a mediana do próprio município.",
+      "new": "A apresentação metodológica do IAU-USP informa que a base usa estimativas de temperatura de superfície derivadas dos satélites Landsat 8 e 9 para analisar contrastes urbanos entre 2014 e 2025. [Apresentação da base pelo IAU-USP](https://www.iau.usp.br/institucional/historico-de-noticias-do-instituto/urbverde-lanca-base-nacional-de-dados-sobre-ilhas-de-calor-urbanas/).",
+      "reason": "O mapa interativo não expôs metodologia nesta consulta; retira resolução e mediana não reproduzidas e cita apresentação primária acessível."
+    },
+    {
+      "slug": "conexao-ita-inpe-embraer-parque",
+      "old": "Há também pesquisa desenvolvida com participação industrial. Em 2022, o ITA noticiou a defesa de uma tese de doutorado industrial sobre roteamento e manutenção de aeronaves, orientada por um professor do instituto e por um pesquisador da Embraer. É um caso concreto de colaboração acadêmica ligada a um problema da indústria. A notícia não informa um volume total de projetos nem permite medir quanto esse tipo de trabalho representa na relação entre as duas instituições. [ITA, 2022](http://www.ita.br/noticias359)",
+      "new": "",
+      "reason": "Retira exemplo de tese cuja notícia do ITA permaneceu inacessível em HTTP e HTTPS; os demais vínculos estão documentados."
+    },
+    {
+      "slug": "conexao-ita-inpe-embraer-parque",
+      "old": "- Instituto Tecnológico de Aeronáutica (ITA), “ITA aprova a 1ª Tese de Doutorado Industrial em Convênio com CNPq e parceria com a Embraer”, publicado e atualizado em 7 de fevereiro de 2022. [URL](http://www.ita.br/noticias359). Consulta em 20 de novembro de 2026.",
+      "new": "",
+      "reason": "Retira referência do exemplo não revalidado."
+    },
+    {
+      "slug": "quais-setores-mais-contratam-sao-jose-dos-campos",
+      "old": "A agenda do Ministério do Trabalho prevê a divulgação da competência de outubro para 30 de novembro, depois da data desta apuração. ",
+      "new": "",
+      "reason": "A URL do calendário redirecionou à página inicial; retira previsão futura não reproduzida em fonte primária acessível."
+    }
+  ],
+  "articles": [
+    {
+      "slug": "populacao-sao-jose-dos-campos-crescimento",
+      "status": "central_claims_reviewed",
+      "result": "Censo 2010/2022, crescimento regional e envelhecimento; estimativa de 2026 via resultado indexado do IBGE.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/noticias/2024/abril/01/ibge-divulga-dados-de-distribuicao-de-populacao-em-sao-jose/",
+          "evidence_key": "4d1514b545430395"
+        },
+        {
+          "url": "https://www.sjc.sp.gov.br/noticias/2023/outubro/30/ibge-divulga-dados-de-genero-e-idade-para-populacao-de-s-jose/",
+          "evidence_key": "832c0c8e30286311"
+        }
+      ],
+      "corrections": 1
+    },
+    {
+      "slug": "bairros-cresceram-sao-jose-dos-campos",
+      "status": "central_claims_reviewed",
+      "result": "Percentuais regionais recalculados; divergência Norte/rural explicitada.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/noticias/2024/abril/01/ibge-divulga-dados-de-distribuicao-de-populacao-em-sao-jose/",
+          "evidence_key": "4d1514b545430395"
+        }
+      ],
+      "corrections": 1
+    },
+    {
+      "slug": "perfil-habitantes-sao-jose-dos-campos",
+      "status": "central_claims_reviewed",
+      "result": "38.852 e 80.504 idosos; 137.245 e 128.855 crianças; recortes regionais.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/servicos/governanca/populacao/",
+          "evidence_key": "731f5f7a35369e8a"
+        }
+      ],
+      "corrections": 0
+    },
+    {
+      "slug": "morar-sao-jose-dos-campos-migracao",
+      "status": "central_claims_reviewed",
+      "result": "43.702 pessoas de 5 anos ou mais em migração de data fixa, tabela 10160.",
+      "sources": [
+        {
+          "url": "https://apisidra.ibge.gov.br/values/t/10160/n6/3549904/v/13435/p/2022",
+          "evidence_key": "8eb63a057db40f09"
+        }
+      ],
+      "corrections": 0
+    },
+    {
+      "slug": "expansao-urbana-sao-jose-dos-campos-impactos",
+      "status": "central_claims_reviewed",
+      "result": "Acréscimos regionais e limites da interpretação como expansão física; área atualizada.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/noticias/2024/abril/01/ibge-divulga-dados-de-distribuicao-de-populacao-em-sao-jose/",
+          "evidence_key": "4d1514b545430395"
+        },
+        {
+          "url": "https://www.sjc.sp.gov.br/media/vajlxffo/1_historia_de_sjc.pdf",
+          "evidence_key": "028458c0cfc6bac9"
+        }
+      ],
+      "corrections": 1
+    },
+    {
+      "slug": "quanto-custa-morar-sao-jose-dos-campos",
+      "status": "central_claims_reviewed",
+      "result": "FipeZAP outubro/2026: R$ 49,37/m²; tarifa R$ 5,25; 50 m² + 44 viagens = R$ 2.699,50.",
+      "sources": [
+        {
+          "url": "https://downloads.fipe.org.br/indices/fipezap/fipezap-202610-residencial-locacao.pdf",
+          "evidence_key": "e203aa0ff143749b"
+        },
+        {
+          "url": "https://www.sjc.sp.gov.br/servicos/governanca/portal-da-transparencia/dados-do-transporte-coletivo/dados-operacionais/",
+          "evidence_key": "7f73e9d4eb174bde"
+        }
+      ],
+      "corrections": 0
+    },
+    {
+      "slug": "aluguel-sao-jose-dos-campos",
+      "status": "central_claims_reviewed",
+      "result": "FipeZAP dezembro/2025: 7,43%, R$ 45,53/m²; amostra jornalística atribuída e limitada.",
+      "sources": [
+        {
+          "url": "https://informa.life/aluguel-em-sao-jose-dos-campos-varia-por-regiao-e-zona-oeste-reune-os-anuncios-mais-caros/",
+          "evidence_key": "bca5c17d695b013b"
+        },
+        {
+          "url": "https://downloads.fipe.org.br/indices/fipezap/fipezap-202512-residencial-locacao.pdf",
+          "evidence_key": "db4209ab1d0dcca9"
+        }
+      ],
+      "corrections": 0
+    },
+    {
+      "slug": "diferenca-morar-regioes-sao-jose-dos-campos",
+      "status": "central_claims_reviewed",
+      "result": "60,12% no Sul/Leste; 261.364 nas quatro outras regiões do quadro corrente.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/noticias/2024/abril/01/ibge-divulga-dados-de-distribuicao-de-populacao-em-sao-jose/",
+          "evidence_key": "4d1514b545430395"
+        },
+        {
+          "url": "https://www.sjc.sp.gov.br/servicos/governanca/populacao/",
+          "evidence_key": "731f5f7a35369e8a"
+        }
+      ],
+      "corrections": 0
+    },
+    {
+      "slug": "bairros-sao-jose-dos-campos-servicos",
+      "status": "central_claims_reviewed",
+      "result": "Polos e equipamentos no diagnóstico histórico; recontagem da lista UBS e data da LC 612 corrigidas.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/media/1ascp0it/7_regioes_urbanas.pdf",
+          "evidence_key": "5b56c8262c82cc6e"
+        },
+        {
+          "url": "https://www.sjc.sp.gov.br/servicos/saude/unidades-basicas-de-saude-ubs/unidades-basicas-de-saude/",
+          "evidence_key": "6092adf285205447"
+        }
+      ],
+      "corrections": 2
+    },
+    {
+      "slug": "crescimento-imobiliario-desigualdade-sjc",
+      "status": "central_claims_reviewed",
+      "result": "7.744 unidades habitacionais, 4.301 em Leste/Sudeste; cronologias distintas; resumo acadêmico revalidado.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/media/1ascp0it/7_regioes_urbanas.pdf",
+          "evidence_key": "5b56c8262c82cc6e"
+        },
+        {
+          "url": "https://www.sjc.sp.gov.br/media/jlmgfozp/9_habitacao.pdf",
+          "evidence_key": "a40f7c56a99cd163"
+        }
+      ],
+      "corrections": 3
+    },
+    {
+      "slug": "onde-estao-os-empregos-sao-jose-dos-campos",
+      "status": "central_claims_reviewed",
+      "result": "RAIS/2017 no diagnóstico: 187.441 vínculos, 36.718 nos dez maiores; balanço 2025 separado do mapa.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/media/1ocdrcvt/consolidacao-dos-dados.pdf",
+          "evidence_key": "9b1867ad36bcc796"
+        },
+        {
+          "url": "https://observatoriodotrabalho.sjc.sp.gov.br/index.php/sao_jose_em_numeros/perfil-do-mundo-do-trabalho/",
+          "evidence_key": "42cec6cc70862a43"
+        },
+        {
+          "url": "https://observatoriodotrabalho.sjc.sp.gov.br/index.php/sao_jose_em_numeros/perfil-do-mundo-do-trabalho-2025/",
+          "evidence_key": "9aaa35e5602dc49a"
+        }
+      ],
+      "corrections": 2
+    },
+    {
+      "slug": "quais-setores-mais-contratam-sao-jose-dos-campos",
+      "status": "central_claims_reviewed",
+      "result": "112.518/213.124 = 52,8%; notas de abril/junho/julho/agosto/setembro e especialização aeronáutica.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/noticias/2026/maio/28/sao-jose-cria-427-empregos-formais-em-abril/",
+          "evidence_key": "bde2c2f9572429b2"
+        },
+        {
+          "url": "https://www.sjc.sp.gov.br/noticias/2026/novembro/04/sao-jose-acumula-mais-de-3900-empregos-formais/",
+          "evidence_key": "95a640f22719389b"
+        },
+        {
+          "url": "https://observatoriodotrabalho.sjc.sp.gov.br/index.php/analise-caged-fevereiro-2026/",
+          "evidence_key": "65779526168d1291"
+        }
+      ],
+      "corrections": 1
+    },
+    {
+      "slug": "embraer-central-economia-sao-jose-dos-campos",
+      "status": "central_claims_reviewed",
+      "result": "Produção local e mais de 23 mil empregados globais no relatório SEC; cluster de alcance supramunicipal.",
+      "sources": [
+        {
+          "url": "https://pitsjc.org.br/projetos/cluster-aeroespacial-brasileiro/",
+          "evidence_key": "f3d0a0994dbec830"
+        },
+        {
+          "url": "https://embraer.com/centro-historico-historia-embraer/pt/",
+          "evidence_key": "26ee7c03e60aa2d5"
+        }
+      ],
+      "corrections": 0
+    },
+    {
+      "slug": "sao-jose-depende-industria-tecnologia-servicos",
+      "status": "central_claims_reviewed",
+      "result": "SIDRA/2021: serviços 50,11%, indústria 42,39%; abertura de empresas 2026; suspensão setorial confirmada no IBGE.",
+      "sources": [
+        {
+          "url": "https://apisidra.ibge.gov.br/values/t/5938/n6/3549904/v/498,513,516,517,520,525,528,6575,6574/p/2021",
+          "evidence_key": "ec5ee8682c75b24c"
+        },
+        {
+          "url": "https://observatoriodotrabalho.sjc.sp.gov.br/index.php/sao_jose_em_numeros/abertura-de-empresas/",
+          "evidence_key": "8f329896f87202fb"
+        }
+      ],
+      "corrections": 0
+    },
+    {
+      "slug": "trabalho-moradia-sao-jose-dos-campos",
+      "status": "central_claims_reviewed",
+      "result": "170.305 até meia hora; total 268.999 e soma de faixas 266.398 mantidos sem redistribuição.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/media/phtdiikg/atlas_origem_destino_domiciliar_2011.pdf",
+          "evidence_key": "f4f5885ef1015e61"
+        },
+        {
+          "url": "https://servicodados.ibge.gov.br/api/v3/agregados/10331/periodos/2022/variaveis/13556?localidades=N6%5B3549904%5D&classificacao=537%5B19429%2C79189%2C79190%2C19431%2C19432%2C79191%2C79192%5D%7C2%5B6794%5D%7C86%5B95251%5D%7C386%5B9680%5D",
+          "evidence_key": "cc06cc6de4fe626e"
+        }
+      ],
+      "corrections": 0
+    },
+    {
+      "slug": "por-que-sao-jose-ciencia-tecnologia",
+      "status": "central_claims_reviewed",
+      "result": "Cronologia institucional; GOCNAE corrigido de 1960 para 1961.",
+      "sources": [
+        {
+          "url": "https://embraer.com/centro-historico-historia-embraer/pt/",
+          "evidence_key": "26ee7c03e60aa2d5"
+        },
+        {
+          "url": "https://www.gov.br/inpe/pt-br/acesso-a-informacao/institucional/historia",
+          "evidence_key": "d1ed655f88873ec5"
+        }
+      ],
+      "corrections": 1
+    },
+    {
+      "slug": "conexao-ita-inpe-embraer-parque",
+      "status": "central_claims_reviewed",
+      "result": "ITA/Embraer 2001; acordo agricultura espacial 01/09/2026–31/08/2031; exemplo de tese não revalidado retirado.",
+      "sources": [
+        {
+          "url": "https://www.pgfis.ita.br/post/embraer-comemora-20-anos-do-programa-em-parceria-com-o-ita",
+          "evidence_key": "81386e1d73511073"
+        },
+        {
+          "url": "https://www.gov.br/inpe/pt-br/area-conhecimento/relacoes-institucionais/repositorio-de-arquivos/sei___21192-000265_2025_34_acordo_de_parceria.pdf",
+          "evidence_key": "84e844e00f691438"
+        },
+        {
+          "url": "https://www.gov.br/inpe/pt-br/area-conhecimento/relacoes-institucionais/cooperacoes-nacionais",
+          "evidence_key": "67a8926cb87fcd7d"
+        }
+      ],
+      "corrections": 2
+    },
+    {
+      "slug": "tecnologia-sao-jose-dos-campos",
+      "status": "central_claims_reviewed",
+      "result": "Exportações ajustadas aos valores arredondados e categorias da fonte municipal: US$ 4,1 bi e 72%.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/noticias/2026/janeiro/26/sao-jose-exporta-para-120-paises-e-diversifica-mercados-em-2025/",
+          "evidence_key": "1664d263c1d121e6"
+        }
+      ],
+      "corrections": 2
+    },
+    {
+      "slug": "inovacao-empregos-empresas",
+      "status": "central_claims_reviewed",
+      "result": "Subiter/PIPE e caso Dexco; resultados empresariais atribuídos, sem inferir empregos locais.",
+      "sources": [
+        {
+          "url": "https://pesquisaparainovacao.fapesp.br/termografia_ativa_permite_realizar_ensaios_nao_destrutivos_de_materiais/3958",
+          "evidence_key": "7557e2ef64de649e"
+        },
+        {
+          "url": "https://bv.fapesp.br/pt/auxilios/108661/sistema-portatil-para-avaliacao-nao-destrutiva-de-materiais-via-termografia-ativa/",
+          "evidence_key": "a573ea79cf645a8c"
+        },
+        {
+          "url": "https://pitsjc.org.br/noticias/nexus-startups/da-incubacao-a-industria-empresa-nascida-no-nexus-desenvolve-tecnologia-que-gera-economia-milionaria-para-a-dexco/",
+          "evidence_key": "7f7bb45471eab582"
+        }
+      ],
+      "corrections": 0
+    },
+    {
+      "slug": "cursos-de-tecnologia-sjc",
+      "status": "central_claims_reviewed",
+      "result": "120 vagas IFSP e taxa R$ 30; prazo corrigido para 04/12/2026; ofertas municipais datadas.",
+      "sources": [
+        {
+          "url": "https://processoseletivo.ifsp.edu.br/tecnicos-2027-1/",
+          "evidence_key": "7d04f645ffd61429"
+        },
+        {
+          "url": "https://sjc.ifsp.edu.br/cursos",
+          "evidence_key": "2d6e2de625d38142"
+        },
+        {
+          "url": "https://www.sjc.sp.gov.br/servicos/inovacao-e-desenvolvimento-economico/trabalho/qualifica-sao-jose/inscricoes/",
+          "evidence_key": "e69d1fb840ecb288"
+        }
+      ],
+      "corrections": 1
+    },
+    {
+      "slug": "como-moradores-se-deslocam-sjc",
+      "status": "central_claims_reviewed",
+      "result": "PlanMob: 46,89%, 26,71%, 23,38%, 2,58%; delimitado a OD/2011 de todos os motivos.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/media/szbmqvyt/diagnostico_planmob.pdf",
+          "evidence_key": "15a197f9b47f423a"
+        }
+      ],
+      "corrections": 2
+    },
+    {
+      "slug": "via-dutra-aproxima-ou-divide-sjc",
+      "status": "central_claims_reviewed",
+      "result": "Inventário histórico de sete passarelas/seis viadutos confirmado; livro corrigido para 2010.",
+      "sources": [
+        {
+          "url": "http://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2018/07/Volume-V-Crescimento-Urbano-e-Industrializa%C3%A7%C3%A3o-em-S%C3%A3o-Jos%C3%A9-dos-Campos.pdf",
+          "evidence_key": "05c9ef87cf1aaa6d"
+        },
+        {
+          "url": "https://www.sjc.sp.gov.br/media/szbmqvyt/diagnostico_planmob.pdf",
+          "evidence_key": "15a197f9b47f423a"
+        }
+      ],
+      "corrections": 1
+    },
+    {
+      "slug": "sjc-preparada-crescimento-populacao",
+      "status": "central_claims_reviewed",
+      "result": "Censo regional e objetivos de planejamento; ausência de avaliação regional nas fontes não generalizada para inexistência de dados.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/noticias/2024/abril/01/ibge-divulga-dados-de-distribuicao-de-populacao-em-sao-jose/",
+          "evidence_key": "4d1514b545430395"
+        },
+        {
+          "url": "https://www.sjc.sp.gov.br/servicos/urbanismo-e-sustentabilidade/planejamento-urbano/plano-diretor/plano-diretor-lei-complementar/",
+          "evidence_key": "c7621ac2886adbaf"
+        }
+      ],
+      "corrections": 0
+    },
+    {
+      "slug": "quem-depende-transporte-publico-sjc",
+      "status": "central_claims_reviewed",
+      "result": "SIDRA/10332: ônibus 31,13%, automóvel 42,86%; universo e variável distinguidos de duração total.",
+      "sources": [
+        {
+          "url": "https://servicodados.ibge.gov.br/api/v3/agregados/10332/periodos/2022/variaveis/1013377?localidades=N6%5B3549904%5D&classificacao=2088%5B79488%2C79193%2C79194%2C79195%2C79196%2C79197%2C79198%2C79207%2C79208%2C79209%2C79210%2C79211%2C79212%2C79213%2C79214%5D%7C1568%5B120704%5D%7C86%5B95251%5D",
+          "evidence_key": "e1aee99af84b2a82"
+        },
+        {
+          "url": "https://www.sjc.sp.gov.br/media/ovycgmqy/bilhetagem.pdf",
+          "evidence_key": "184364b77047d289"
+        }
+      ],
+      "corrections": 0
+    },
+    {
+      "slug": "conexoes-distancias-sjc-regioes",
+      "status": "central_claims_reviewed",
+      "result": "Corredores, acessos e datas institucionais das rodovias; distâncias explicitamente referenciais.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/servicos/governanca/sao-jose-em-dados/localizacao/",
+          "evidence_key": "673e011647100087"
+        },
+        {
+          "url": "https://www23.concessionariatamoios.com.br/a-rodovia/a-rodovia",
+          "evidence_key": "0679e8840381a5d6"
+        },
+        {
+          "url": "https://www.der.sp.gov.br/der/institucional/sobre/memoria_do_transporte",
+          "evidence_key": "08418d61f51d8ee7"
+        }
+      ],
+      "corrections": 0
+    },
+    {
+      "slug": "onde-estao-hospitais-unidades-sjc",
+      "status": "central_claims_reviewed",
+      "result": "Lista UBS inconsistente explicitada; ata COMUS p. 4 visualizada: APS 58,43%, ESF 41,53% em 2025.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/servicos/saude/unidades-basicas-de-saude-ubs/unidades-basicas-de-saude/",
+          "evidence_key": "6092adf285205447"
+        },
+        {
+          "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/plano_saude/arquivos/2026_1_20260302154118.pdf",
+          "evidence_key": "95529223871a41f7"
+        },
+        {
+          "url": "https://www.sjc.sp.gov.br/media/nkyd4xwe/ata-ordina-ria-n%C2%BA-4-08-04-2026-1-27.pdf",
+          "evidence_key": "5f2d3e5d9d5277e1"
+        }
+      ],
+      "corrections": 4
+    },
+    {
+      "slug": "acesso-saude-regioes-sjc",
+      "status": "central_claims_reviewed",
+      "result": "Plano p. 34: cobertura 61,63%/2024 e meta 70%/2029; equipes 84→110; página ESF 73 não combinada como mesma base.",
+      "sources": [
+        {
+          "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/plano_saude/arquivos/2026_1_20260302154118.pdf",
+          "evidence_key": "95529223871a41f7"
+        },
+        {
+          "url": "https://www.sjc.sp.gov.br/servicos/saude/nucleos-de-saude/estrategia-saude-da-familia/",
+          "evidence_key": "83bd574ce081c398"
+        }
+      ],
+      "corrections": 2
+    },
+    {
+      "slug": "problemas-apontados-moradores-sjc",
+      "status": "central_claims_reviewed",
+      "result": "Ouvidoria/2025: 797 atendimentos; médias por secretaria 27, 43, 107 e 109 dias.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/media/o4qngew1/relatorio-2025.pdf",
+          "evidence_key": "acced69abc3fc8e9"
+        },
+        {
+          "url": "https://www.sjc.sp.gov.br/servicos/governanca/portal-da-transparencia/ouvidorias/ouvidoria-da-prefeitura/",
+          "evidence_key": "d1082a030aa33ff9"
+        }
+      ],
+      "corrections": 0
+    },
+    {
+      "slug": "riscos-ambientais-sjc-clima-enchentes-calor",
+      "status": "central_claims_reviewed",
+      "result": "PMRR/2025: 51 áreas, 160 setores, 64 R3 e 96 SM; estudo térmico e metodologia IAU delimitados.",
+      "sources": [
+        {
+          "url": "https://www.sjc.sp.gov.br/media/hlvpa0k0/atualizacao-do-plano-municipal-de-reducao-de-riscos.pdf",
+          "evidence_key": "4df865eca002b26c"
+        },
+        {
+          "url": "https://periodicos.unitau.br/biociencias/article/view/4043",
+          "evidence_key": "7da29880e5379bb6"
+        }
+      ],
+      "corrections": 1
+    },
+    {
+      "slug": "indicadores-qualidade-vida-sjc",
+      "status": "central_claims_reviewed",
+      "result": "Scorecard IPS/2026 inspecionado visualmente: 68,31; dimensões 81,48/77,55/45,90; PIB per capita via IBGE indexado.",
+      "sources": [
+        {
+          "url": "https://ipsbrasil.org.br/explore/scorecard/3549904/download/6f093164-73a7-4089-a34a-1baa150c2c3f",
+          "evidence_key": "8d6a18f2a170bb19"
+        },
+        {
+          "url": "https://ipsbrasil.org.br/relatorios/download/IPSBrasil2026_RMETODOLOGICO_PT_DIGITAL.pdf",
+          "evidence_key": "03b84f67ca36b383"
+        }
+      ],
+      "corrections": 0
+    }
+  ],
+  "pending_by_slug": {
+    "crescimento-imobiliario-desigualdade-sjc": [
+      "O PDF integral do estudo UPC não foi revalidado; o trecho foi limitado ao resumo editorial acessível."
+    ],
+    "onde-estao-hospitais-unidades-sjc": [
+      "A Prefeitura precisa esclarecer o total operacional de UBS: cabeçalho 40, lista principal 41 nomes e seção avançada com quatro registros. A divergência está explícita no texto."
+    ]
+  },
+  "limitations": [
+    "Sem vistoria, entrevistas ou confirmação direta com órgãos.",
+    "Estatísticas de 2011, 2017, 2021 e 2022 permanecem históricas e são identificadas como tais.",
+    "Afirmações de ausência de dados significam ausência nas fontes consultadas; não provam inexistência de outras bases.",
+    "Fontes jornalísticas são tratadas como relatos atribuídos; listas dinâmicas e editais precisam de nova consulta se a publicação ocorrer em outra data.",
+    "Nenhum acesso de escrita ao banco, publicação ou deploy realizado."
+  ],
+  "additional_sources": [
+    "https://www.inpe.br/noticias/noticia.php?Cod_Noticia=3350",
+    "https://servicos.sjc.sp.gov.br/governo/boletim/boletimPDF/20181201152251cf296ebd-f117-4630-97f9-94089c1b655c.pdf",
+    "https://revistes.upc.edu/index.php/SIIU/article/view/10122",
+    "https://www.iau.usp.br/institucional/historico-de-noticias-do-instituto/urbverde-lanca-base-nacional-de-dados-sobre-ilhas-de-calor-urbanas/",
+    "https://www.ibge.gov.br/comunicados/46995-nota-tecnica-pib-dos-municipios-2.html",
+    "https://www.sec.gov/Archives/edgar/data/1355444/000162828026021824/erj-20251231.htm"
+  ]
+}

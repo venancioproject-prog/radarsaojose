@@ -61,15 +61,15 @@ function getFallbackArticles() {
         id: 'post-' + (idx + 1),
         title: art.title,
         slug: art.slug,
-        excerpt: art.meta_description || art.answer_first,
-        content: art.article_markdown || '',
-        cover_image_url: 'fotos_radar/foto_' + ((idx % 6) + 1) + '.jpg',
+        excerpt: art.excerpt || art.meta_description || art.answer_first,
+        content: art.article_html || art.article_markdown || '',
+        cover_image_url: art.cover_image_url || 'web-media/capa_sjc_skyline-e75d8e49a056.webp',
         status: 'published',
-        published_at: new Date(Date.now() - idx * 86400000).toISOString(),
-        created_at: new Date(Date.now() - idx * 86400000).toISOString(),
-        updated_at: new Date(Date.now() - idx * 86400000).toISOString(),
-        author_name: 'Leonardo Venâncio',
-        author_role: 'Head de Inteligência & Dados',
+        published_at: art.published_at || '2026-11-20',
+        created_at: art.published_at || '2026-11-20',
+        updated_at: art.updated_at || '2026-11-20',
+        author_name: 'Radar São José',
+        author_role: 'Jornalismo e inteligência de dados',
         category: getCategoryName(art.cluster),
         tags: [art.cluster, 'São José dos Campos', 'Inteligência'],
         seo_metadata: {
@@ -79,9 +79,9 @@ function getFallbackArticles() {
           primary_keyword: art.primary_keyword,
           geo_summary: art.geo_summary,
           read_time: '6 min de leitura',
-          faq: art.faq || []
+          faq: art.faq || [], ...(art.seo_metadata || {})
         },
-        views_count: 1200 + (30 - idx) * 95,
+        views_count: 0,
         is_featured: idx === 0
       }));
       return localPostsCache;

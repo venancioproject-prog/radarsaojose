@@ -15,7 +15,7 @@
   <meta id="ogTitle" property="og:title" content="Editoria | Radar São José" />
   <meta id="ogDescription" property="og:description" content="Reportagens, indicadores e análises sobre São José dos Campos." />
   <meta property="og:site_name" content="Radar São José" />
-  <meta property="og:image" content="https://radarsaojose.com.br/fotos_radar/capa_sjc_skyline.jpg" />
+  <meta property="og:image" content="https://radarsaojose.vercel.app/fotos_radar/capa_sjc_skyline.jpg" />
 
   <!-- Google Fonts: Montserrat + Merriweather -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -290,6 +290,7 @@
   <link rel="stylesheet" href="header-brand.css?v=20261102-alinhamento" />
   <link rel="stylesheet" href="header-menu.css?v=20261105-mobile-cta">
   <script src="header-menu.js?v=20261105" defer></script>
+<script src="/blog-editorial.js?v=20261120"></script>
 </head>
 <body class="bg-white text-slate-900 font-sans antialiased">
 
@@ -527,7 +528,7 @@
             </a>
             
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
-              <img id="heroAuthorAvatar" src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-7 h-7 rounded-full object-cover ring-2 ring-slate-100" loading="lazy" />
+              <img id="heroAuthorAvatar" src="fotos_radar/logo.png" alt="Leonardo Venâncio" class="w-7 h-7 rounded-full object-cover ring-2 ring-slate-100" loading="lazy" />
               <span>Por <strong id="heroAuthorName">Leonardo Venâncio</strong></span>
             </div>
           </div>
@@ -1273,6 +1274,7 @@
     }
 
     function formatPortalDate(isoStr) {
+      if (/^\d{4}-\d{2}-\d{2}$/.test(String(isoStr))) return isoStr.split('-').reverse().join('/');
       if (!isoStr) return 'Recente';
       try {
         const d = new Date(isoStr);
@@ -1287,7 +1289,7 @@
     }
 
     function getArticleUrl(slug) {
-      return `artigo.html?slug=${encodeURIComponent(slug)}`;
+      return `/artigos/${encodeURIComponent(slug)}.html`;
     }
 
     function renderPortalArticleCard(post) {
@@ -1296,7 +1298,7 @@
       const readTime = (post.seo_metadata && post.seo_metadata.read_time) || '4 min de leitura';
       const author = post.author_name || 'Leonardo Venâncio';
       const isMayumi = author.toLowerCase().includes('mayumi');
-      const authorAvatarSrc = isMayumi ? 'fotos_radar/mayumi.jpg' : 'fotos_radar/LEONARDO.jpeg';
+      const authorAvatarSrc = isMayumi ? 'fotos_radar/mayumi.jpg' : 'fotos_radar/logo.png';
       const coverUrl = post.cover_image_url || 'web-media/capa_sjc_skyline-e75d8e49a056.webp';
       const articleUrl = getArticleUrl(post.slug);
       const excerpt = post.excerpt || (post.seo_metadata && post.seo_metadata.bluf_summary) || post.title;
@@ -1328,7 +1330,7 @@
 
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
             <div class="flex items-center gap-2">
-              <img src="${authorAvatarSrc}" alt="${author}" class="w-5 h-5 rounded-full object-cover ring-1 ring-slate-200" onerror="this.src='fotos_radar/LEONARDO.jpeg'" />
+              <img src="${authorAvatarSrc}" alt="${author}" class="w-5 h-5 rounded-full object-cover ring-1 ring-slate-200" onerror="this.src='fotos_radar/logo.png'" />
               <span class="font-medium text-slate-600">${author}</span>
             </div>
             <a href="${articleUrl}" class="font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
@@ -1398,7 +1400,7 @@
       const authorAvatar = document.getElementById('heroAuthorAvatar');
       if (authorAvatar) {
         const isMayumi = authorVal.toLowerCase().includes('mayumi');
-        authorAvatar.src = isMayumi ? 'fotos_radar/mayumi.jpg' : 'fotos_radar/LEONARDO.jpeg';
+        authorAvatar.src = isMayumi ? 'fotos_radar/mayumi.jpg' : 'fotos_radar/logo.png';
         authorAvatar.alt = authorVal;
       }
 
@@ -1641,34 +1643,7 @@
       }
 
       // 5. Buscar Artigos no Banco Supabase
-      let allPosts = [];
-      try {
-        const supRes = await fetch(`${SUPABASE_BLOG_URL}/rest/v1/blog_posts?status=eq.published&order=published_at.desc&select=*`, {
-          headers: {
-            'apikey': SUPABASE_BLOG_KEY,
-            'Authorization': `Bearer ${SUPABASE_BLOG_KEY}`
-          }
-        });
-        if (supRes.ok) {
-          allPosts = await supRes.json();
-        }
-      } catch (err) {
-        console.warn('[Editoria] Supabase warn:', err);
-      }
-
-      if (!allPosts || allPosts.length === 0) {
-        try {
-          const apiRes = await fetch('/api/posts?status=published&sortBy=published_at&order=desc&limit=100');
-          if (apiRes.ok) {
-            const data = await apiRes.json();
-            if (data && data.success && Array.isArray(data.posts)) {
-              allPosts = data.posts;
-            }
-          }
-        } catch (apiErr) {
-          console.warn('[Editoria] Local API fallback warn:', apiErr);
-        }
-      }
+      const allPosts = window.RADAR_EDITORIAL_POSTS.slice();
 
       // 6. Filtrar rigorosamente as matérias desta editoria
       let editoriaPosts = [];

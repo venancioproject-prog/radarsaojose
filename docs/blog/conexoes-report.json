@@ -1,0 +1,71 @@
+{
+  "destination": "index.html#planos",
+  "plan": "Report",
+  "reviewed_at": "2026-11-20",
+  "evidence": {
+    "report-metrics.js": "Campos do questionário e definições dos indicadores do relatório.",
+    "indicadores-report.json": "Resultados recalculados na base local de 477 participantes, com denominadores e hash da origem; sem respostas individuais.",
+    "report-bindings.js": "Vínculos entre indicadores, recortes e telas do Report. Tokens numéricos legados são localizadores, não resultados publicáveis.",
+    "radar-planos.js": "Plano Report inclui relatório, dashboard, entrevistas em profundidade e análises de comportamento e consumo.",
+    "index.html": "Seção #planos apresenta o catálogo e encaminha à contratação."
+  },
+  "articles": {
+    "perfil-habitantes-sao-jose-dos-campos": {
+      "heading": "Da idade dos moradores às escolhas de consumo",
+      "paragraph": "Na pesquisa própria apresentada no Report do Radar São José, {{young_rent.formatted}} dos participantes de 25 a 34 anos responderam que moram de aluguel e querem ter uma casa própria: {{young_rent.numerator}} de {{young_rent.valid}} respostas válidas nesse recorte. O dado aproxima o perfil etário de uma aspiração concreta do público pesquisado. O relatório aprofunda essa leitura com recortes de renda, moradia e hábitos de consumo.",
+      "cta": "[Assine o plano Report do Radar São José para aprofundar a leitura dos perfis e comportamentos pesquisados.](index.html#planos)",
+      "report_fields": ["age", "income", "home", "frequency"],
+      "report_origins": [22, 23, 40]
+    },
+    "aluguel-sao-jose-dos-campos": {
+      "heading": "O que a pesquisa do Radar acrescenta à leitura da moradia",
+      "paragraph": "Na base da pesquisa própria do Radar São José, {{rent.formatted}} dos participantes que responderam à pergunta sobre moradia escolheram “Moro de aluguel mas quero uma casa própria”: {{rent.numerator}} de {{rent.valid}} respostas válidas. Esse resultado, analisado no Report com recortes de idade e renda, acrescenta a perspectiva do público aos preços anunciados. Para negócios ligados à habitação, é uma pista para investigar aspirações e perfis de clientes.",
+      "cta": "[Assine o plano Report para explorar os recortes de moradia e perfil do público no Radar São José.](index.html#planos)",
+      "report_fields": ["home", "age", "income"],
+      "report_origins": [22, 30, 40]
+    },
+    "quanto-custa-morar-sao-jose-dos-campos": {
+      "heading": "Como o orçamento aparece nas escolhas de lazer",
+      "paragraph": "O orçamento também aparece nas escolhas de lazer: na pesquisa própria do Radar São José, {{price.formatted}} apontaram “É tudo muito caro” como a maior dificuldade para sair à noite, entre {{price.valid}} respostas válidas. O Report relaciona esse tema a perfis do público e critérios de escolha de restaurantes e bares. Para quem oferece lazer ou alimentação, o resultado ajuda a investigar o papel do preço no posicionamento do negócio.",
+      "cta": "[Assine o plano Report e aprofunde a análise das escolhas de consumo e lazer em São José.](index.html#planos)",
+      "report_fields": ["barrier", "choice", "spend"],
+      "report_origins": [20, 23, 25, 45]
+    },
+    "diferenca-morar-regioes-sao-jose-dos-campos": {
+      "heading": "Onde o público mora e quais regiões frequenta",
+      "paragraph": "Na pesquisa própria do Radar São José, {{destination.formatted}} dos participantes escolheram a opção agrupada “Centro / Oeste (ex: Aquarius, Vila Adyana)” como a região mais frequentada ao sair de casa, entre {{destination.valid}} respostas válidas. O Report coloca região de moradia e destino declarado lado a lado. Para um comércio ou serviço, esse recorte ajuda a investigar a circulação do público para além do endereço residencial.",
+      "cta": "[Assine o plano Report para aprofundar essa leitura territorial e os hábitos de consumo do público pesquisado.](index.html#planos)",
+      "report_fields": ["region", "destination"],
+      "report_origins": [14, 39],
+      "report_methods": ["flows"]
+    },
+    "como-moradores-se-deslocam-sjc": {
+      "heading": "Os meios de transporte usados pelo público do Radar",
+      "paragraph": "Na pesquisa própria do Radar São José, {{car.formatted}} dos participantes marcaram carro próprio e {{bus.formatted}} marcaram ônibus entre os meios que utilizam, com {{bus.valid}} respostas válidas. A pergunta aceita múltiplas escolhas: uma pessoa pode usar os dois, e os percentuais não representam parcelas do total de viagens. O Report aprofunda esse comportamento com recortes de renda e ocupação, complementando a leitura histórica da Pesquisa Origem e Destino.",
+      "cta": "[Assine o plano Report para explorar os hábitos de mobilidade e os perfis do público pesquisado pelo Radar São José.](index.html#planos)",
+      "report_fields": ["transport", "income", "work"],
+      "report_origins": [21, 26]
+    },
+    "quem-depende-transporte-publico-sjc": {
+      "heading": "O ônibus nos diferentes perfis de público",
+      "paragraph": "Na base da pesquisa própria do Radar São José, {{bus_low_income.formatted}} dos participantes com renda domiciliar de até R$ 2.800 marcaram ônibus entre os meios utilizados: {{bus_low_income.numerator}} de {{bus_low_income.valid}} respostas válidas nesse grupo. O dado se refere aos participantes desse recorte e permite usos combinados de transporte. O Report compara perfis de renda e trabalho, acrescentando uma perspectiva útil para negócios que precisam entender como seu público circula.",
+      "cta": "[Assine o plano Report e aprofunde a leitura de mobilidade, renda e comportamento do público no Radar São José.](index.html#planos)",
+      "report_fields": ["transport", "income", "work"],
+      "report_origins": [21, 26]
+    },
+    "problemas-apontados-moradores-sjc": {
+      "heading": "Das reclamações registradas às demandas do público",
+      "paragraph": "Na pesquisa própria do Radar São José, {{mobility_lacks.formatted}} dos participantes marcaram “Melhorar o ônibus e o trânsito” ao responder o que mais falta na cidade, entre {{mobility_lacks.valid}} respostas válidas. A pergunta permite mais de uma escolha. O Report apresenta essa demanda junto a temas como segurança, cultura e lazer: uma leitura das prioridades declaradas pelo público pesquisado, complementar aos registros de quem procurou a Ouvidoria.",
+      "cta": "[Assine o plano Report para aprofundar a leitura das demandas e dos hábitos do público pesquisado.](index.html#planos)",
+      "report_fields": ["lacks"],
+      "report_origins": [18]
+    },
+    "indicadores-qualidade-vida-sjc": {
+      "heading": "Como os participantes avaliam a vida na cidade",
+      "paragraph": "Na pesquisa própria do Radar São José, {{pride.formatted}} dos participantes disseram ter orgulho de morar na cidade, entre {{pride.valid}} respostas válidas. O Report coloca essa percepção junto à avaliação da qualidade de vida e às expectativas sobre o futuro de São José. É uma perspectiva complementar ao IPS: ouvir o público ajuda a entender como pertencimento e avaliação da cidade convivem na experiência dos participantes.",
+      "cta": "[Assine o plano Report para conhecer essa leitura de qualidade de vida, percepção e comportamento em São José.](index.html#planos)",
+      "report_fields": ["quality", "pride", "future"],
+      "report_origins": [13, 36]
+    }
+  }
+}

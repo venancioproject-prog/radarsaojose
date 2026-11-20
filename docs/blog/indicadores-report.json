@@ -1,0 +1,125 @@
+{
+  "calculated_at": "2026-11-20",
+  "source": "dados_pesquisa_477.json",
+  "source_sha256": "08a1f4349c1276c3180d661065237fb6220b0912e42230b7c7e48255e48a3c85",
+  "engine": "report-metrics.js",
+  "engine_sha256": "56d382132d4c0f2cfbe3611cced74c443e19c8cf861927d60e92a8473a96d378",
+  "N": 477,
+  "scope": "Retrato da base local utilizada nesta edição editorial; não certifica sincronia com o banco de produção. Percentuais entre respostas válidas de cada pergunta e recorte; transporte e demandas admitem múltiplas escolhas. Não extrapolar para toda a população municipal.",
+  "metrics": {
+    "young_rent": {
+      "spec": {
+        "field": "home",
+        "options": [
+          "Moro de aluguel mas quero uma casa própria"
+        ],
+        "filters": {
+          "age": "25 a 34 anos"
+        }
+      },
+      "valid": 134,
+      "numerator": 86,
+      "value": 64.17910447761194,
+      "formatted": "64,2%"
+    },
+    "rent": {
+      "spec": {
+        "field": "home",
+        "options": [
+          "Moro de aluguel mas quero uma casa própria"
+        ]
+      },
+      "valid": 470,
+      "numerator": 192,
+      "value": 40.85106382978723,
+      "formatted": "40,9%"
+    },
+    "price": {
+      "spec": {
+        "field": "barrier",
+        "options": [
+          "É tudo muito caro"
+        ]
+      },
+      "valid": 477,
+      "numerator": 158,
+      "value": 33.123689727463315,
+      "formatted": "33,1%"
+    },
+    "destination": {
+      "spec": {
+        "field": "destination",
+        "options": [
+          "Centro / Oeste (ex: Aquarius, Vila Adyana)"
+        ]
+      },
+      "valid": 477,
+      "numerator": 199,
+      "value": 41.719077568134175,
+      "formatted": "41,7%"
+    },
+    "car": {
+      "spec": {
+        "field": "transport",
+        "options": [
+          "Carro próprio"
+        ]
+      },
+      "valid": 477,
+      "numerator": 308,
+      "value": 64.57023060796647,
+      "formatted": "64,6%"
+    },
+    "bus": {
+      "spec": {
+        "field": "transport",
+        "options": [
+          "Ônibus"
+        ]
+      },
+      "valid": 477,
+      "numerator": 221,
+      "value": 46.331236897274636,
+      "formatted": "46,3%"
+    },
+    "bus_low_income": {
+      "spec": {
+        "field": "transport",
+        "options": [
+          "Ônibus"
+        ],
+        "filters": {
+          "income": "Até R$ 2.800"
+        }
+      },
+      "valid": 73,
+      "numerator": 59,
+      "value": 80.82191780821918,
+      "formatted": "80,8%"
+    },
+    "mobility_lacks": {
+      "spec": {
+        "field": "lacks",
+        "options": [
+          "Melhorar o ônibus e o trânsito"
+        ]
+      },
+      "valid": 477,
+      "numerator": 231,
+      "value": 48.42767295597484,
+      "formatted": "48,4%"
+    },
+    "pride": {
+      "spec": {
+        "field": "pride",
+        "options": [
+          "Sim"
+        ]
+      },
+      "valid": 477,
+      "numerator": 354,
+      "value": 74.21383647798741,
+      "formatted": "74,2%"
+    }
+  }
+}
